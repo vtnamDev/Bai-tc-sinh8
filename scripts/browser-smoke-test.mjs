@@ -18,6 +18,31 @@ try {
   await page.goto(baseURL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.locator('#heroSample').waitFor({ state: 'visible', timeout: 10000 });
 
+  // Capture the actual workspace, not only settings and presentation views.
+  const mobileLibraryBounds = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+  }));
+  assert.ok(mobileLibraryBounds.document <= mobileLibraryBounds.viewport + 2,
+    `Horizontal overflow on mobile library home: ${JSON.stringify(mobileLibraryBounds)}`);
+  await page.screenshot({ path: `${outputDir}/mobile-library-home.png`, fullPage: true });
+
+  const desktopPage = await browser.newPage({
+    viewport: { width: 1440, height: 900 },
+    deviceScaleFactor: 1,
+  });
+  desktopPage.on('pageerror', error => pageErrors.push(error.message));
+  await desktopPage.goto(baseURL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await desktopPage.locator('#heroSample').waitFor({ state: 'visible', timeout: 10000 });
+  await desktopPage.screenshot({ path: `${outputDir}/desktop-library-home.png`, fullPage: true });
+  const desktopLibraryBounds = await desktopPage.evaluate(() => ({
+    viewport: window.innerWidth,
+    document: document.documentElement.scrollWidth,
+  }));
+  assert.ok(desktopLibraryBounds.document <= desktopLibraryBounds.viewport + 2,
+    `Horizontal overflow on desktop library home: ${JSON.stringify(desktopLibraryBounds)}`);
+  await desktopPage.close();
+
   // Mobile navigation + adaptive performance presets.
   await page.locator('#mobileMenu').click();
   await page.locator('#mainNav [data-view="settings"]').click();
