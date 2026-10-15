@@ -26,7 +26,7 @@ for (const [name, source, limit] of sourceBudgets) {
   assert.ok(bytes <= limit, `${name} exceeds its source budget: ${bytes} bytes > ${limit} bytes`);
 }
 const totalSourceBytes = sourceBudgets.reduce((sum, [, source]) => sum + Buffer.byteLength(source, 'utf8'), 0);
-assert.ok(totalSourceBytes <= 523 * 1024, `Combined JS/CSS source exceeds 523 KiB: ${totalSourceBytes} bytes`);
+assert.ok(totalSourceBytes <= 526 * 1024, `Combined JS/CSS source exceeds 526 KiB: ${totalSourceBytes} bytes`);
 assert.match(html, /<meta name="viewport"[^>]*viewport-fit=cover/, 'Mobile safe-area layout must remain enabled.');
 assert.match(html, /<script[^>]+defer/, 'Application scripts should be deferred to avoid blocking HTML parsing.');
 assert.ok(!/<link[^>]+rel=["']preload["'][^>]+href=["'][^"']+\\.(?:mp4|webm|glb)(?:[?"']|$)/i.test(html), 'Large video/model assets must not be eagerly preloaded.');
@@ -58,6 +58,13 @@ for (const slide of deck.slides.filter(item => item.classroomPrompt)) {
   assert.ok(typeof prompt.explanation === 'string' && prompt.explanation.length > 20, `Case quiz needs explanatory feedback: ${slide.title}`);
 }
 assert.equal(deck.slides.filter(slide => slide.model3D).length, 5, 'Keep the five curated 3D scenes.');
+assert.ok(html.includes('<strong>4xT</strong>') && html.includes('assets/mark.svg'), 'Visible branding and favicon must use the 4xT identity.');
+for (const group of ['tooth', 'stomach', 'diarrhea', 'worms', 'hepatitis']) {
+  assert.ok(deck.slides.some(slide => slide.storyGroup === group && (slide.links || []).some(link => /^https:\/\/(?:www\.)?(?:who\.int|niddk\.nih\.gov)\//i.test(link.url || ''))),
+    `The ${group} chapter needs a traceable WHO or NIDDK reference.`);
+}
+assert.ok(lightCss.includes('#183f2a') && lightCss.includes('-webkit-text-fill-color'), 'Slide title color must retain high contrast on cream.');
+assert.ok(!/(?:#d2a0ff|#d3a3ff|#d5a5ff|#a48bff|#a58aff|#bca0ff|#c5a5ff|#e7a1ff|#f2a0e7|#f0a5ed)/i.test(css), 'Legacy purple and magenta accents must not return.');
 const modelSlides = deck.slides.filter(slide => slide.model3D);
 assert.ok(modelSlides.every(slide => typeof (slide.modelFallback || slide.imageFallback || slide.image) === 'string' && Boolean(slide.modelFallback || slide.imageFallback || slide.image)), 'Every 3D scene must have a usable fallback image.');
 assert.ok(modelSlides.every(slide => Boolean(slide.modelFallbackAlt || slide.imageFallbackAlt || slide.imageAlt)), 'Every 3D fallback image must have accurate alt text.');

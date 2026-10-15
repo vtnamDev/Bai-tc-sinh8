@@ -1,8 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <defs><linearGradient id="g" x1="9" y1="8" x2="55" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#d7ffe8"/><stop offset="1" stop-color="#4bbd86"/></linearGradient><radialGradient id="c" cx="0" cy="0" r="1" gradientTransform="matrix(21 20 -21 21 24 20)" gradientUnits="userSpaceOnUse"><stop stop-color="#f1ffe2"/><stop offset=".42" stop-color="#8adca6"/><stop offset="1" stop-color="#226c4b"/></radialGradient></defs>
-  <rect x="2" y="2" width="60" height="60" rx="19" fill="url(#g)"/>
-  <circle cx="32" cy="32" r="21" stroke="#0a281b" stroke-opacity=".65" stroke-width="1.6"/>
-  <path d="M16 33c4-13 18-20 29-12 7 5 3 18-5 25-8 7-18-1-24-13Z" fill="url(#c)"/>
-  <circle cx="34" cy="31" r="7" fill="#0a281b" fill-opacity=".76"/>
-  <path d="M10 23c12 5 29 19 38 31" stroke="#0a281b" stroke-width="1.7" stroke-linecap="round" stroke-opacity=".75"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="20" fill="#fffaf0" stroke="#d0a13b" stroke-width="2"/>
+  <path d="M13 16C15 8 22 7 28 14C22 14 17 15 13 16Z" fill="#2b6744"/><path d="M24 14C27 6 35 5 41 9C35 14 29 16 24 14Z" fill="#5f8949"/>
+  <text x="31.5" y="39" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="900" letter-spacing="-1.6"><tspan fill="#204f35">4</tspan><tspan fill="#d0a13b">x</tspan><tspan fill="#204f35">T</tspan></text>
+  <path d="M8 45C18 57 42 58 55 41" fill="none" stroke="#d0a13b" stroke-width="2.4" stroke-linecap="round"/><path d="M50 15l1.4 3.4 3.4 1.4-3.4 1.4-1.4 3.4-1.4-3.4-3.4-1.4 3.4-1.4Z" fill="#d0a13b"/>
 </svg>

@@ -54,12 +54,16 @@ try {
   const initialPresentationState = await page.evaluate(() => ({
     caption: document.querySelector('#viewerSlideCaption')?.textContent?.trim() || null,
     title: document.querySelector('#slideStage .slide-title')?.textContent?.trim() || null,
+    titleColor: document.querySelector('#slideStage .slide-title') ? getComputedStyle(document.querySelector('#slideStage .slide-title')).color : null,
+    brandName: document.querySelector('.brand-wordmark strong')?.textContent?.trim() || null,
     bundledSlideCount: window.BIOSPHERE_BAI32_SEED?.slides?.length ?? null,
     viewerHidden: document.querySelector('#presentationViewer')?.hidden ?? null,
     scripts: [...document.scripts].map(script => ({ src: script.src, loaded: Boolean(script.src) })),
   }));
   assert.equal(initialPresentationState.bundledSlideCount, 25,
     `Browser loaded the wrong lesson data: ${JSON.stringify(initialPresentationState)}`);
+  assert.equal(initialPresentationState.brandName, '4xT', 'The workspace must display the new 4xT identity.');
+  assert.equal(initialPresentationState.titleColor, 'rgb(24, 63, 42)', 'The opening title must be dark enough to read on cream.');
   assert.equal(initialPresentationState.caption, '01 / 25',
     `Presentation did not render the first slide. State: ${JSON.stringify(initialPresentationState)}. Page errors: ${pageErrors.join(' | ') || 'none'}`);
   // The counter is intentionally visually hidden on narrow phones to preserve slide space.
@@ -127,7 +131,7 @@ try {
     bridge:el.dataset.motionBridge,
     accent:getComputedStyle(el).getPropertyValue('--stage-accent').trim(),
   }));
-  assert.deepEqual(continuityState, { storyGroup:'foundation', bridge:'continuity', accent:'#70dfd0' },
+  assert.deepEqual(continuityState, { storyGroup:'foundation', bridge:'continuity', accent:'#286748' },
     `Adjacent slides in one chapter should keep the same palette and continuous motion: ${JSON.stringify(continuityState)}`);
   const oneSurfaceState = await stage.evaluate(el => {
     const page = el.querySelector(':scope > .slide-page:not(.slide-transition-ghost)');

@@ -4,7 +4,7 @@ window.BIOSPHERE_BAI32_SEED = {
   "subject": "biology",
   "status": "ready",
   "date": "2026-10-15",
-  "description": "KHTN 8 · Bài 32 · 25 trang · màu theo từng chủ đề bệnh, ý chính và ý phụ có phân cấp, ảnh khoa học có nguồn, sơ đồ trực quan và câu hỏi tương tác.",
+  "description": "KHTN 8 · Bài 32 · 25 trang · nhận diện 4xT, mô hình 3D, màu theo chủ đề bệnh, nguồn y tế và câu hỏi tương tác.",
   "isSeed": true,
   "slides": [
     {
@@ -242,7 +242,7 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelFallbackCredit": "Suyash.dwivedi · Wikimedia Commons · CC BY-SA 4.0",
       "modelFallbackLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
       "modelFallbackLicenseLabel": "CC BY-SA 4.0",
-      "links": [],
+      "links": [{"label":"WHO · Sức khỏe răng miệng","url":"https://www.who.int/news-room/fact-sheets/detail/oral-health"}],
       "flowVisual": {
         "label": "CƠ CHẾ SÂU RĂNG",
         "steps": [
@@ -379,6 +379,7 @@ window.BIOSPHERE_BAI32_SEED = {
         }
       ],
       "storyGroup": "stomach",
+      "links": [{"label":"NIDDK · Loét dạ dày và tá tràng","url":"https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers"}],
       "keyIdea": "Loét dạ dày–tá tràng có nguyên nhân y khoa cụ thể, không thể kết luận chỉ từ thói quen ăn uống.",
       "modelEmbed": "https://sketchfab.com/models/e0f1952de7204654ba469c3e887a029b/embed?autostart=0&ui_theme=light&ui_infos=0&ui_controls=1&ui_hint=0&ui_watermark=1&dnt=1",
       "modelCredit": "Realistic Human Stomach · neshallads / Sketchfab · CC BY-NC 4.0",
@@ -525,8 +526,8 @@ window.BIOSPHERE_BAI32_SEED = {
       "imageFit": "cover",
       "videoAlt": "Người uống nước từ cốc thủy tinh",
       "model3D": "intestine",
-      "modelTitle": "Mô hình ruột",
-      "modelDescription": "Mô hình tham chiếu ruột non từ Human Reference Atlas. Các điểm đánh dấu trên mô hình thuộc dữ liệu gốc; đây không phải mô hình mô tả tổn thương do tiêu chảy.",
+      "modelTitle": "Ruột non · mô hình 3D tham chiếu",
+      "modelDescription": "Mô hình ruột non từ Human Reference Atlas; các mốc màu thuộc dữ liệu gốc, không phải tổn thương hay dấu hiệu bệnh.",
       "modelFallback": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Digestive_system_diagram_en.svg",
       "modelFallbackAlt": "Sơ đồ hệ tiêu hóa người của Mariana Ruiz (LadyofHats), Wikimedia Commons; dùng để định vị cơ quan.",
       "modelFallbackSourceUrl": "https://commons.wikimedia.org/wiki/File:Digestive_system_diagram_en.svg",
@@ -537,7 +538,7 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelCredit": "Human Reference Atlas / HuBMAP · mô hình ruột non nam · CC BY 4.0",
       "modelLicense": "https://creativecommons.org/licenses/by/4.0/",
       "modelSourceUrl": "https://apps.humanatlas.io/kg-explorer/ref-organ/small-intestine-male/v1.2",
-      "links": [],
+      "links": [{"label":"WHO · Bệnh tiêu chảy","url":"https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease"}],
       "flowVisual": {
         "label": "ƯU TIÊN AN TOÀN",
         "steps": [
@@ -681,15 +682,15 @@ window.BIOSPHERE_BAI32_SEED = {
       "videoAlt": null,
       "imageFallback": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Ascaris_lumbricoides1.jpg",
       "model3D": "worm",
-      "modelTitle": "Mô hình giun đường ruột",
-      "modelDescription": "Minh họa hình dạng giun; vòng lây truyền vẫn được giải thích bằng sơ đồ CDC.",
+      "modelTitle": "Giun đũa · mô hình 3D minh họa",
+      "modelDescription": "Thân giun thuôn hai đầu, uốn cong để quan sát hình dạng; không phải bản quét sinh học.",
       "modelFallback": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Ascaris_lumbricoides1.jpg",
       "modelFallbackAlt": "Ảnh giun đũa Ascaris lumbricoides từ một bản scan lịch sử, Wikimedia Commons; hình minh họa chứ không phải chẩn đoán.",
       "modelFallbackSourceUrl": "https://commons.wikimedia.org/wiki/File:Ascaris_lumbricoides1.jpg",
       "modelFallbackCredit": "Delorieux for Johann Gottfried Bremser · Wikimedia Commons · Public Domain Mark 1.0",
       "modelFallbackLicense": "https://creativecommons.org/publicdomain/mark/1.0/",
       "modelFallbackLicenseLabel": "Public Domain Mark 1.0",
-      "links": [],
+      "links": [{"label":"WHO · Nhiễm giun truyền qua đất","url":"https://www.who.int/news-room/fact-sheets/detail/soil-transmitted-helminth-infections"}],
       "flowVisual": {
         "label": "ĐƯỜNG LÂY CÓ THỂ GẶP",
         "steps": [
@@ -806,7 +807,7 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelCredit": "Human Reference Atlas / HuBMAP · mô hình gan nam · CC BY 4.0",
       "modelLicense": "https://creativecommons.org/licenses/by/4.0/",
       "modelSourceUrl": "https://humanatlas.io/3d-reference-library",
-      "links": [],
+      "links": [{"label":"WHO · Viêm gan A","url":"https://www.who.int/news-room/fact-sheets/detail/hepatitis-a"}],
       "flowVisual": {
         "label": "ĐƯỜNG LÂY VIÊM GAN A",
         "steps": [

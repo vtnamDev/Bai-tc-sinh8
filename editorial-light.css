@@ -64,7 +64,7 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
 }
 #presentationViewer #slideStage .slide-layout{position:relative;z-index:2}
 #presentationViewer #slideStage .slide-content{color:#332d22}
-#presentationViewer #slideStage .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-title{color:#183f2a!important;text-shadow:none!important}
 #presentationViewer #slideStage .slide-subtitle{color:#625a49!important}
 #presentationViewer #slideStage .slide-kicker{color:#8a671c!important;background:#fff6df!important;border-color:#e8d8b2!important}
 #presentationViewer #slideStage .slide-key-idea{
@@ -295,7 +295,7 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
  color:#342d22!important
 }
 #presentationViewer #slideStage .slide-content{color:#342d22!important}
-#presentationViewer #slideStage .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-title{color:#183f2a!important;text-shadow:none!important}
 #presentationViewer #slideStage .slide-subtitle{color:#625a49!important;text-shadow:none!important}
 #presentationViewer #slideStage .slide-kicker{color:#8a671c!important;background:#fff6df!important;border:1px solid #e8d8b2!important;box-shadow:none!important}
 #presentationViewer #slideStage .slide-key-idea{color:#342e22!important;background:linear-gradient(135deg,#fffef9,#f7efd9)!important;border-color:#e5d5ad!important}
@@ -407,7 +407,7 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
   box-shadow:0 14px 38px #94742a10!important;
   backdrop-filter:blur(9px)!important;-webkit-backdrop-filter:blur(9px)!important;
 }
-#presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-title{color:#183f2a!important;text-shadow:none!important}
 #presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-subtitle{color:#625a49!important;text-shadow:none!important}
 #presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-kicker{color:#8a671c!important;background:#fff6df!important;border-color:#e8d8b2!important}
 @media(min-width:801px){
@@ -611,3 +611,8 @@ html[data-theme=light] #presentationViewer .viewer-mini:disabled{
 #presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-fallback-credit{
   display:flex!important;position:relative;left:auto;right:auto;bottom:auto;margin:2px 4px 0
 }
+
+/* 4xT v27 — title contrast token for every light-mode slide. */
+#presentationViewer #slideStage>.slide-page .slide-title,#presentationViewer #slideStage>.slide-page .slide-content .slide-title{color:#183f2a!important;-webkit-text-fill-color:#183f2a!important;text-shadow:none!important;opacity:1!important}
+html[data-theme=light] .nav-link.active,html[data-theme=light] .nav-link:hover{color:#244b32!important;background:linear-gradient(120deg,#e7f1df,#fff0c7)!important;border-color:#d6bd7b!important}
+html[data-theme=light] .filter-chip.active,html[data-theme=light] .filter-chip:hover{color:#244b32!important;background:linear-gradient(120deg,#e5f0df,#fff0ce)!important;border-color:#c4d4ae!important}

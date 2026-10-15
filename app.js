@@ -452,7 +452,8 @@
         items: [
           ['Ruột non', 'Tham gia tiêu hóa và hấp thu phần lớn chất dinh dưỡng.'],
           ['Niêm mạc ruột', 'Bề mặt bên trong giúp tăng diện tích tiếp xúc cho hấp thu.'],
-          ['Liên hệ tiêu chảy', 'Tiêu chảy có thể gây mất nước và chất điện giải; mô hình không mô tả tác nhân gây bệnh.']
+          ['Liên hệ tiêu chảy', 'Tiêu chảy có thể gây mất nước và chất điện giải; mô hình không mô tả tác nhân gây bệnh.'],
+        ['Giới hạn mô hình', 'Mẫu tham chiếu tập trung vào ruột non; các mốc màu không phải dấu hiệu tổn thương hay nhiễm bệnh.']
         ]
       },
       worm: {
@@ -460,7 +461,8 @@
         items: [
           ['Giun đường ruột', 'Một số loài giun có thể ký sinh trong ruột người.'],
           ['Đường lây', 'Con đường lây phụ thuộc loài giun; không phải mọi loài đều có cùng vòng đời.'],
-          ['Phòng tránh', 'Giữ vệ sinh tay, nước và thực phẩm; trao đổi với người lớn hoặc nhân viên y tế khi cần.']
+          ['Phòng tránh', 'Giữ vệ sinh tay, nước và thực phẩm; trao đổi với người lớn hoặc nhân viên y tế khi cần.'],
+        ['Giới hạn mô hình', 'Hình dựng giúp quan sát thân giun thuôn hai đầu; không phải ảnh quét sinh học và không đại diện cho mọi loài giun.']
         ]
       },
       liver: {
@@ -612,11 +614,26 @@
     model.panel.classList.remove('is-3d-ready');
   }
 
-  function makeTube(THREE, group, points, color, radius = 0.07, tubularSegments = 56) {
+  function makeTube(THREE, group, points, color, radius = 0.07, tubularSegments = 56, tapered = false) {
     const curve = new THREE.CatmullRomCurve3(points.map(point => new THREE.Vector3(point[0], point[1], point[2] || 0)));
-    const geometry = new THREE.TubeGeometry(curve, tubularSegments, radius, 10, false);
-    const material = new THREE.MeshStandardMaterial({ color, roughness: 0.48, metalness: 0.02 });
+    const radialSegments = tapered ? 12 : 10;
+    const geometry = new THREE.TubeGeometry(curve, tubularSegments, radius, radialSegments, false);
+    if (tapered) {
+      const positions = geometry.attributes.position, ringSize = radialSegments + 1;
+      for (let i = 0; i <= tubularSegments; i++) {
+        const t = i / tubularSegments, edge = Math.max(0, Math.min(1, t / 0.18, (1 - t) / 0.18)), smooth = edge * edge * (3 - 2 * edge), scale = 0.045 + 0.955 * smooth, center = curve.getPointAt(t);
+        for (let j = 0; j <= radialSegments; j++) {
+          const index = i * ringSize + j;
+          positions.setXYZ(index, center.x + (positions.getX(index) - center.x) * scale, center.y + (positions.getY(index) - center.y) * scale, center.z + (positions.getZ(index) - center.z) * scale);
+        }
+      }
+      positions.needsUpdate = true;
+      geometry.computeVertexNormals();
+    }
+    const material = tapered ? new THREE.MeshPhysicalMaterial({ color, roughness: 0.29, metalness: 0, clearcoat: 0.62, clearcoatRoughness: 0.24 }) : new THREE.MeshStandardMaterial({ color, roughness: 0.48, metalness: 0.02 });
     const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
     group.add(mesh);
     return mesh;
   }
@@ -722,19 +739,11 @@
       return;
     }
     if (type === 'worm') {
-      const first = [[-0.62, 0.66, -0.05], [-0.26, 0.40, 0.10], [0.33, 0.51, 0.0], [0.54, 0.21, 0.13], [0.08, -0.05, 0.05], [-0.45, -0.38, 0.12], [-0.05, -0.68, 0.0]];
-      const second = [[0.48, 0.66, -0.16], [0.13, 0.39, -0.02], [-0.36, 0.29, -0.14], [-0.45, -0.03, 0.02], [0.05, -0.28, -0.10], [0.42, -0.57, 0.0]];
-      makeTube(THREE, group, first, '#d9a879', 0.071, 140);
-      makeTube(THREE, group, second, '#f0d2ae', 0.053, 140);
-      first.forEach((point, i) => {
-        if (i > 0 && i < first.length - 1) {
-          makeEllipsoid(THREE, group, [point[0], point[1], (point[2] || 0) + 0.055], [0.055, 0.035, 0.022], '#bf8a65');
-        }
-      });
-      for (let i = 0; i < 7; i++) {
-        const angle = i * 0.85;
-        makeEllipsoid(THREE, group, [Math.cos(angle) * 0.22, -0.84 + Math.sin(angle) * 0.07, 0.04], [0.05, 0.07, 0.05], '#e9d6a0');
-      }
+      // Ascaris-inspired silhouette: two smooth bodies with tapered ends, intentionally not segmented.
+      const female = [[-0.72,0.68,-0.08],[-0.68,0.39,-0.02],[-0.42,0.17,0.04],[-0.04,0.23,0.08],[0.38,0.38,0.04],[0.65,0.17,0],[0.49,-0.13,0.06],[0.12,-0.29,0.10],[-0.25,-0.28,0.06],[-0.54,-0.47,0],[-0.30,-0.71,0.02]];
+      const male = [[0.70,0.66,-0.20],[0.44,0.46,-0.18],[0.16,0.53,-0.14],[-0.16,0.53,-0.12],[-0.36,0.30,-0.10],[-0.20,0.05,-0.08],[0.12,0.02,-0.08],[0.36,-0.13,-0.06],[0.29,-0.39,-0.04],[0.07,-0.56,-0.02],[0.16,-0.71,0.04],[0.29,-0.64,0.08]];
+      makeTube(THREE, group, female, '#d8b58b', 0.050, 190, true);
+      makeTube(THREE, group, male, '#f0d8b4', 0.034, 190, true);
       return;
     }
     if (type === 'liver') {
@@ -878,7 +887,7 @@
     if (fallback?.dataset.fallbackSrc) viewer.setAttribute('poster', fallback.dataset.fallbackSrc);
     if (motionEnabled && !reducedMotion.matches) {
       viewer.setAttribute('auto-rotate', '');
-      viewer.setAttribute('rotation-per-second', '12deg');
+      viewer.setAttribute('rotation-per-second', '8deg');
     }
     slot.appendChild(viewer);
     const model = { kind: 'native', panel, viewer, autoRotate: viewer.hasAttribute('auto-rotate'), onLoad: null, onError: null, onProgress: null, visibilityHandler: null };
@@ -1083,7 +1092,7 @@
         model.autoRotate = !model.autoRotate;
         if (model.autoRotate && motionEnabled && !reducedMotion.matches) {
           viewer.setAttribute('auto-rotate', '');
-          viewer.setAttribute('rotation-per-second', '12deg');
+          viewer.setAttribute('rotation-per-second', '8deg');
         } else viewer.removeAttribute('auto-rotate');
         button.setAttribute('aria-pressed', String(model.autoRotate));
         button.textContent = model.autoRotate ? 'Dừng xoay' : 'Tự xoay';
@@ -1098,8 +1107,11 @@
         model.autoRotate = motionEnabled && !reducedMotion.matches;
         if (model.autoRotate) viewer.setAttribute('auto-rotate', '');
         else viewer.removeAttribute('auto-rotate');
-        button.setAttribute('aria-pressed', String(model.autoRotate));
-        button.textContent = model.autoRotate ? 'Dừng xoay' : 'Tự xoay';
+        const rotateButton = panel.querySelector('[data-model-action="rotate"]');
+        if (rotateButton) {
+          rotateButton.setAttribute('aria-pressed', String(model.autoRotate));
+          rotateButton.textContent = model.autoRotate ? 'Dừng xoay' : 'Tự xoay';
+        }
       }
       return;
     }
@@ -1886,7 +1898,7 @@
       '<article class="slide-page" data-palette="' + escapeHTML(palette) + '" data-story-group="' + escapeHTML(storyGroup) + '" data-motion-bridge="' + escapeHTML(motionBridge) + '" data-visual="' + escapeHTML(slide.visual || 'editorial') + '" data-direction="' + escapeHTML(direction) + '" data-preset="' + escapeHTML(motionPreset) + '">' +
         '<div class="' + (isTeamSlide ? 'slide-layout slide-layout--team' : 'slide-layout') + '">' +
           '<section class="' + (isTeamSlide ? 'slide-content slide-content--team' : 'slide-content') + '">' +
-            '<div class="slide-kicker">' + escapeHTML(slide.kicker || 'BIOSPHERE / SLIDE') + '</div>' +
+            '<div class="slide-kicker">' + escapeHTML(slide.kicker || '4xT / SLIDE') + '</div>' +
             '<h1 class="slide-title">' + escapeHTML(slide.title || currentDeck.title) + '</h1>' +
             '<p class="slide-subtitle">' + escapeHTML(slide.subtitle || 'Bổ sung sau khi kiểm chứng tài liệu.') + '</p>' +
             (isTeamSlide ? renderTeamGallery(slide) : (keyIdeaHtml + renderSlideVisualBoard(slide) + (slide.model3D ? renderMediaModeBar('media-mode-bar--mobile') : '') + pointHtml + promptHtml + quizHtml + endingHtml + sourceHtml + linksHtml)) +
@@ -1946,7 +1958,7 @@
     list.innerHTML = slides.map((slide, index) =>
       '<button type="button" class="contents-item' + (index === slideIndex ? ' is-current' : '') + '" data-jump-slide="' + index + '"' + (index === slideIndex ? ' aria-current="page"' : '') + '>' +
         '<span class="contents-item-number">' + String(index + 1).padStart(2, '0') + '</span>' +
-        '<span class="contents-item-copy"><small>' + escapeHTML(slide.kicker || 'BIOSPHERE / SLIDE') + '</small><strong>' + escapeHTML(slide.title || 'Trang chiếu') + '</strong></span>' +
+        '<span class="contents-item-copy"><small>' + escapeHTML(slide.kicker || '4xT / SLIDE') + '</small><strong>' + escapeHTML(slide.title || 'Trang chiếu') + '</strong></span>' +
         '<span class="contents-item-arrow" aria-hidden="true">↗</span>' +
       '</button>'
     ).join('');
