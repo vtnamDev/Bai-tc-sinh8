@@ -49,3 +49,179 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
 @media(max-width:800px){#presentationViewer #slideStage .slide-layout--team{height:auto;min-height:0;gap:10px}#presentationViewer #slideStage .team-member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#presentationViewer #slideStage .team-member-card{min-height:86px;padding:8px;gap:8px;border-radius:15px}#presentationViewer #slideStage .team-member-avatar{flex-basis:52px;width:52px;border-radius:15px}#presentationViewer #slideStage .team-member-role{font-size:8px;padding:4px 6px}#presentationViewer #slideStage .team-member-name{font-size:clamp(13px,3.4vw,17px)}#presentationViewer #slideStage .team-gallery-caption{font-size:8px;letter-spacing:.08em}#presentationViewer #slideStage .team-gallery-footer{flex-wrap:wrap;gap:7px;margin-bottom:8px}}
 @media(max-width:390px){#presentationViewer #slideStage .team-member-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){#presentationViewer #slideStage .team-member-card{animation:none!important;transition:none!important}}
+
+
+/* Every presentation slide uses the warm cream canvas; chapter hues remain small accents. */
+#presentationViewer #slideStage{
+  --stage-accent:#a77e26!important;
+  --stage-secondary:#e0bf71!important;
+  background:radial-gradient(ellipse at 10% 0%,#f5e6bf9c,transparent 35%),radial-gradient(ellipse at 100% 100%,#f1e4c45c,transparent 37%),linear-gradient(135deg,#fffdf7 0%,#fbf7ed 56%,#f8f0df 100%)!important;
+  color:#332d22!important;
+}
+#presentationViewer #slideStage .slide-page:not([data-visual=team]){
+  background:linear-gradient(135deg,#fffdf9f2,#fbf6eaf2 66%,#fffdf7f5)!important;
+  color:#332d22!important;
+}
+#presentationViewer #slideStage .slide-layout{position:relative;z-index:2}
+#presentationViewer #slideStage .slide-content{color:#332d22}
+#presentationViewer #slideStage .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-subtitle{color:#625a49!important}
+#presentationViewer #slideStage .slide-kicker{color:#8a671c!important;background:#fff6df!important;border-color:#e8d8b2!important}
+#presentationViewer #slideStage .slide-key-idea{
+  background:linear-gradient(135deg,#fffef9,#f7efd9)!important;border-color:#e5d5ad!important;
+  box-shadow:inset 0 1px #fff,0 12px 28px #92742a12!important;color:#342e22!important
+}
+#presentationViewer #slideStage .slide-key-idea-top>span{color:#937020!important}
+#presentationViewer #slideStage .slide-key-idea-top>b{color:#887f6b!important}
+#presentationViewer #slideStage .slide-key-idea p{color:#342e22!important}
+#presentationViewer #slideStage .slide-support-heading strong{color:#8e6c20!important}
+#presentationViewer #slideStage .slide-support-heading:after{background:linear-gradient(90deg,#dcc27c,transparent)!important}
+#presentationViewer #slideStage .slide-points{color:#3d3629!important}
+#presentationViewer #slideStage .slide-point{
+  background:linear-gradient(145deg,#fffef9,#fbf4e5)!important;border:1px solid #e8dcc1!important;
+  color:#3b3429!important;box-shadow:0 8px 19px #8b6e2a0c!important
+}
+#presentationViewer #slideStage .slide-point span{color:#3b3429!important}
+#presentationViewer #slideStage .slide-point b{color:#8e6a1b!important;background:#f4e7c5!important}
+#presentationViewer #slideStage .slide-source{color:#776747!important;background:linear-gradient(90deg,#f3e6c67a,transparent)!important;border-color:#d6b86c!important}
+#presentationViewer #slideStage .slide-links{color:#3d3629!important}
+#presentationViewer #slideStage .slide-links-title{color:#8e6b1e!important}
+#presentationViewer #slideStage .slide-links a{color:#4a3b21!important;background:#fffaf0!important;border-color:#e7d8b8!important}
+#presentationViewer #slideStage .slide-links a span{color:#9a751d!important}
+#presentationViewer #slideStage .editorial-diagram{
+  color:#383125!important;background:linear-gradient(145deg,#fffef9,#f7f0e2)!important;
+  border-color:#e6d8bb!important;box-shadow:inset 0 1px #fff,0 10px 24px #92742a0a!important
+}
+#presentationViewer #slideStage .editorial-diagram-heading>span{color:#94701c!important}
+#presentationViewer #slideStage .editorial-diagram-heading h2{color:#332d22!important}
+#presentationViewer #slideStage .editorial-diagram-heading p{color:#675d49!important}
+#presentationViewer #slideStage .editorial-diagram-node{
+  color:#3c352a!important;background:#fffdf8!important;border-color:#e4d8bd!important;
+  box-shadow:0 6px 16px #92742a0a!important
+}
+#presentationViewer #slideStage .editorial-diagram-node strong{color:#332d22!important}
+#presentationViewer #slideStage .editorial-diagram-node p{color:#6b614e!important}
+#presentationViewer #slideStage .editorial-diagram-index{color:#866419!important;background:#f6e9c8!important}
+#presentationViewer #slideStage .editorial-map-core{color:#393124!important;background:#fff9e9!important;border-color:#e0cb91!important}
+#presentationViewer #slideStage .editorial-map-core strong{color:#6f5118!important}
+#presentationViewer #slideStage .art-caption{color:#706044!important;text-shadow:none!important}
+#presentationViewer #slideStage .art-caption span:first-child{color:#94701c!important}
+#presentationViewer #slideStage .ending-action{
+  color:#46391f!important;background:#fffaf0!important;border-color:#e5d5b4!important;
+  box-shadow:0 6px 16px #8b6e2a0c!important
+}
+#presentationViewer #slideStage .ending-action-primary{color:#fffdf7!important;background:linear-gradient(110deg,#9b792f,#c7a454)!important;border-color:transparent!important}
+
+/* Interactive case questions and quizzes use the same light reading surface. */
+#presentationViewer #slideStage .classroom-prompt{
+  color:#383125!important;background:linear-gradient(145deg,#fffef9,#f7f0e2)!important;
+  border-color:#e5d7b9!important;box-shadow:0 10px 24px #92742a0a!important
+}
+#presentationViewer #slideStage .classroom-prompt-kicker,
+#presentationViewer #slideStage .classroom-prompt-kicker b{color:#8d6a1d!important}
+#presentationViewer #slideStage .classroom-scenario,
+#presentationViewer #slideStage .classroom-question{color:#332d22!important}
+#presentationViewer #slideStage .classroom-answer{border-color:#e6dbc2!important}
+#presentationViewer #slideStage .classroom-answer strong{color:#87651c!important}
+#presentationViewer #slideStage .classroom-answer p{color:#3d3629!important}
+#presentationViewer #slideStage .classroom-answer small{color:#6c624f!important}
+#presentationViewer #slideStage .reveal-answer-btn{color:#6e5117!important;background:#f8eccb!important;border-color:#e3ce95!important}
+#presentationViewer #slideStage .case-quiz-answer{color:#393124!important;background:#fffdf7!important;border-color:#e4d7bc!important}
+#presentationViewer #slideStage .case-quiz-answer span:last-child{color:#393124!important}
+#presentationViewer #slideStage .case-quiz-letter{color:#856117!important;background:#f6e9c8!important;border-color:#e4d2a4!important}
+#presentationViewer #slideStage .case-quiz-answer.is-correct{background:#e7f4df!important;border-color:#9cc48c!important}
+#presentationViewer #slideStage .case-quiz-answer.is-wrong{background:#fff0e8!important;border-color:#e3a393!important}
+#presentationViewer #slideStage .classroom-answer strong.case-quiz-result{color:#84601a!important}
+
+#presentationViewer #slideStage .quiz-panel{
+  --quiz-accent:#a67a23;
+  color:#3a3327!important;background:linear-gradient(145deg,#fffdf8,#f7efd9)!important;
+  border-color:#e5d5ad!important;box-shadow:0 12px 30px #92742a12!important;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
+}
+#presentationViewer #slideStage .quiz-panel:before{opacity:.12}
+#presentationViewer #slideStage .quiz-panel-top{color:#82621d!important}
+#presentationViewer #slideStage .quiz-panel-top b{color:#80601b!important;border-color:#e7d7b4!important;background:#fffaf0!important}
+#presentationViewer #slideStage .quiz-panel-top span i{background:#9dbb72!important;box-shadow:none!important}
+#presentationViewer #slideStage .quiz-progress{background:#e8dcc1!important}
+#presentationViewer #slideStage .quiz-question-label span{color:#97701d!important}
+#presentationViewer #slideStage .quiz-question-label strong,
+#presentationViewer #slideStage .quiz-results h3,
+#presentationViewer #slideStage .quiz-score-orb strong{color:#332d22!important}
+#presentationViewer #slideStage .quiz-answer{color:#41382b!important;background:#fffdf8!important;border-color:#e7dcc5!important;box-shadow:0 4px 12px #886b2508!important}
+#presentationViewer #slideStage .quiz-answer-text{color:#41382b!important}
+#presentationViewer #slideStage .quiz-option-letter{color:#8e6b1e!important;background:#f7edcf!important;border-color:#e5d6b3!important}
+#presentationViewer #slideStage .quiz-answer.is-correct{color:#244b29!important;background:#e8f4df!important;border-color:#9dc38f!important}
+#presentationViewer #slideStage .quiz-answer.is-correct .quiz-answer-text{color:#244b29!important}
+#presentationViewer #slideStage .quiz-answer.is-wrong{color:#793e34!important;background:#fff0e9!important;border-color:#e3a596!important}
+#presentationViewer #slideStage .quiz-answer.is-wrong .quiz-answer-text{color:#793e34!important}
+#presentationViewer #slideStage .quiz-encouragement{color:#655b49!important;background:#f4e8cb!important}
+#presentationViewer #slideStage .quiz-feedback{color:#3d3528!important;background:#fffaf0!important;border-color:#e5d8bd!important}
+#presentationViewer #slideStage .quiz-feedback strong,
+#presentationViewer #slideStage .quiz-feedback p{color:#3d3528!important}
+#presentationViewer #slideStage .quiz-feedback.is-correct{background:#e8f4df!important;border-color:#b0cda3!important}
+#presentationViewer #slideStage .quiz-feedback.is-wrong{background:#fff0e9!important;border-color:#e3a596!important}
+#presentationViewer #slideStage .quiz-feedback-icon{color:#315f35!important;background:#dceccf!important}
+#presentationViewer #slideStage .quiz-feedback.is-wrong .quiz-feedback-icon{color:#884236!important;background:#f8ddd3!important}
+#presentationViewer #slideStage .quiz-continue-hint{color:#71664e!important}
+#presentationViewer #slideStage .quiz-score-strip{color:#776642!important;border-color:#e5d8bd!important}
+#presentationViewer #slideStage .quiz-score-strip strong{color:#3c3427!important}
+#presentationViewer #slideStage .quiz-score-strip small,
+#presentationViewer #slideStage .quiz-sound-hint{color:#766b56!important}
+#presentationViewer #slideStage .quiz-score-orb{background:radial-gradient(circle at 34% 26%,#f6e6bf,#fffaf0 76%)!important;border-color:#e0cb94!important;box-shadow:inset 0 1px #fff,0 0 28px #c3a14b18!important}
+#presentationViewer #slideStage .quiz-score-orb span,
+#presentationViewer #slideStage .quiz-score-orb small{color:#76613a!important}
+#presentationViewer #slideStage .quiz-score-meter{background:#e9ddc3!important}
+#presentationViewer #slideStage .quiz-results .quiz-result-subtitle{color:#71664f!important}
+#presentationViewer #slideStage .quiz-recap-row{background:#fffaf0!important;border-color:#e7dcc5!important}
+#presentationViewer #slideStage .quiz-recap-row strong,
+#presentationViewer #slideStage .quiz-recap-row p{color:#453b2d!important}
+#presentationViewer #slideStage .quiz-recap-icon{color:#315f35!important;background:#dceccf!important}
+#presentationViewer #slideStage .quiz-recap-row.is-wrong .quiz-recap-icon{color:#884236!important;background:#f8ddd3!important}
+#presentationViewer #slideStage .quiz-action{color:#49391c!important;background:#fffaf0!important;border-color:#e4d5b6!important}
+#presentationViewer #slideStage .quiz-action-primary{color:#fffdf7!important;background:linear-gradient(110deg,#9b792f,#c7a454)!important}
+
+/* Soft, themed stationery stickers stay behind the content grid and never capture clicks. */
+#presentationViewer #slideStage .slide-page:not([data-visual=team])::before,
+#presentationViewer #slideStage .slide-page:not([data-visual=team])::after{
+  position:absolute;z-index:1;display:grid;place-items:center;pointer-events:none;
+  border:1px solid #e3d2a9;border-radius:16px;background:#fffdf4cc;
+  box-shadow:0 8px 20px #94742a12;line-height:1;user-select:none
+}
+#presentationViewer #slideStage .slide-page:not([data-visual=team])::before{
+  content:"🧬";top:18px;right:22px;width:45px;height:45px;font-size:23px;transform:rotate(7deg);opacity:.72
+}
+#presentationViewer #slideStage .slide-page:not([data-visual=team])::after{
+  content:"✿";left:22px;bottom:18px;width:34px;height:34px;font-size:20px;color:#bd9850;transform:rotate(-9deg);opacity:.66
+}
+#presentationViewer #slideStage[data-slide-index="1"] .slide-page::before{content:"🧬"}
+#presentationViewer #slideStage[data-slide-index="3"] .slide-page::before{content:"🧬"}
+#presentationViewer #slideStage[data-slide-index="4"] .slide-page::before{content:"🍎"}
+#presentationViewer #slideStage[data-slide-index="5"] .slide-page::before{content:"🔎"}
+#presentationViewer #slideStage[data-slide-index="6"] .slide-page::before{content:"🦷"}
+#presentationViewer #slideStage[data-slide-index="7"] .slide-page::before{content:"🪥"}
+#presentationViewer #slideStage[data-slide-index="8"] .slide-page::before{content:"🩺"}
+#presentationViewer #slideStage[data-slide-index="9"] .slide-page::before{content:"🧪"}
+#presentationViewer #slideStage[data-slide-index="10"] .slide-page::before{content:"🩺"}
+#presentationViewer #slideStage[data-slide-index="11"] .slide-page::before{content:"🧴"}
+#presentationViewer #slideStage[data-slide-index="12"] .slide-page::before{content:"📝"}
+#presentationViewer #slideStage[data-slide-index="13"] .slide-page::before{content:"💧"}
+#presentationViewer #slideStage[data-slide-index="14"] .slide-page::before{content:"🫧"}
+#presentationViewer #slideStage[data-slide-index="15"] .slide-page::before{content:"🥤"}
+#presentationViewer #slideStage[data-slide-index="16"] .slide-page::before{content:"🌱"}
+#presentationViewer #slideStage[data-slide-index="17"] .slide-page::before{content:"🧼"}
+#presentationViewer #slideStage[data-slide-index="18"] .slide-page::before{content:"🧫"}
+#presentationViewer #slideStage[data-slide-index="19"] .slide-page::before{content:"🍋"}
+#presentationViewer #slideStage[data-slide-index="20"] .slide-page::before{content:"🔍"}
+#presentationViewer #slideStage[data-slide-index="21"] .slide-page::before{content:"🌿"}
+#presentationViewer #slideStage[data-slide-index="22"] .slide-page::before{content:"🧩"}
+#presentationViewer #slideStage[data-slide-index="23"] .slide-page::before{content:"🎯"}
+#presentationViewer #slideStage[data-slide-index="24"] .slide-page::before{content:"📚"}
+#presentationViewer #slideStage[data-slide-index="25"] .slide-page::before{content:"🌼"}
+@media(max-width:800px){
+  #presentationViewer #slideStage .slide-page:not([data-visual=team])::before{top:7px;right:7px;width:27px;height:27px;border-radius:10px;font-size:15px;opacity:.24}
+  #presentationViewer #slideStage .slide-page:not([data-visual=team])::after{left:5px;bottom:5px;width:22px;height:22px;font-size:13px;opacity:.24}
+}
+@media(prefers-reduced-motion:reduce){
+  #presentationViewer #slideStage .slide-page::before,#presentationViewer #slideStage .slide-page::after{transform:none!important}
+}
