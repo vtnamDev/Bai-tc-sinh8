@@ -46,7 +46,7 @@ window.BIOSPHERE_BAI32_SEED = {
     {
       "kicker": "LỜI CHÀO · NHÓM THỰC HIỆN",
       "title": "Xin chào cô và các bạn!",
-      "subtitle": "Chúng em là nhóm BioSphere Slides — cùng tìm hiểu năm bệnh liên quan đến hệ tiêu hóa bằng kiến thức khoa học chính xác và những cách phòng bệnh gần gũi.",
+      "subtitle": "Chúng em là Tổ 4 — cùng tìm hiểu năm bệnh liên quan đến hệ tiêu hóa bằng kiến thức khoa học chính xác và những cách phòng bệnh gần gũi.",
       "points": [],
       "teamMembers": [
         {
@@ -90,12 +90,12 @@ window.BIOSPHERE_BAI32_SEED = {
           "animal": "panda"
         }
       ],
-      "note": "BIOSPHERE SLIDES · KHOA HỌC TỰ NHIÊN 8",
+      "note": "TỔ 4 · KHOA HỌC TỰ NHIÊN 8",
       "visual": "team",
       "palette": "teal",
       "imageMotionStyle": "editorial",
       "storyGroup": "foundation",
-      "keyIdea": "Tám thành viên — cùng học hỏi, chia sẻ và trình bày kiến thức khoa học."
+      "keyIdea": "Tổ 4 gồm tám thành viên — cùng học hỏi, chia sẻ và trình bày kiến thức khoa học."
     },
     {
       "kicker": "KIẾN THỨC NỀN · HÀNH TRÌNH CỦA THỨC ĂN",
