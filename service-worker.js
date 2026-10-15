@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-cream-cinematic-models-v23-foundation';
+const SHELL_VERSION = '20261015-cream-cinematic-models-v24-foundation';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [
