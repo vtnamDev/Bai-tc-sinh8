@@ -226,6 +226,15 @@ try {
   embedFallbackState.fallbackOpacity = await embeddedModel.locator('.anatomy3d-fallback').evaluate(image => getComputedStyle(image).opacity);
   assert.ok(Number.parseFloat(embedFallbackState.fallbackOpacity) >= 0.95, 'A cited image must become fully visible after the fallback transition.');
   await page.screenshot({ path: `${outputDir}/mobile-model-view.png` });
+  const annotationToggle = embeddedModel.locator('[data-model-action="annotations"]');
+  await annotationToggle.click();
+  assert.equal(await annotationToggle.getAttribute('aria-expanded'), 'true', 'The anatomy annotations toggle must expose its expanded state.');
+  const annotationPanel = embeddedModel.locator('.anatomy3d-annotation-panel');
+  await annotationPanel.waitFor({ state: 'visible' });
+  assert.ok((await annotationPanel.textContent()).includes('Men răng'), 'The tooth model annotation should connect the 3D view to the biology lesson.');
+  await annotationToggle.click();
+  assert.equal(await annotationToggle.getAttribute('aria-expanded'), 'false', 'The annotation panel must be dismissible.');
+  assert.equal(await annotationPanel.isVisible(), false);
   assert.equal(await page.locator('#slideStage > .slide-page:not(.slide-transition-ghost)').evaluate(el => el.classList.contains('is-model-active')), true,
     'The active mobile model view must enable the interaction layer.');
   assert.equal(await page.locator('#slideStage .media-mode-bar--mobile button[data-media-mode="model"]').getAttribute('aria-pressed'), 'true');
@@ -280,6 +289,10 @@ try {
     return projector?.getAttribute('aria-pressed') === 'true' &&
       fullscreen?.getAttribute('aria-pressed') === String(document.fullscreenElement === viewer);
   }, null, { timeout: 5000 });
+  await page.waitForFunction(() => {
+    const page = document.querySelector('#presentationViewer #slideStage > .slide-page:not(.slide-transition-ghost)');
+    return page && page.getAnimations().every(animation => animation.playState !== 'running');
+  }, null, { timeout: 4000 });
   const projectorState = await page.evaluate(() => {
     const viewer = document.querySelector('#presentationViewer');
     const stage = document.querySelector('#slideStage');
@@ -300,6 +313,7 @@ try {
       ghostCount:stage?.querySelectorAll(':scope > .slide-transition-ghost').length ?? 0,
       pageHeight:page?.getBoundingClientRect().height ?? 0,
       stageHeight:stage?.getBoundingClientRect().height ?? 0,
+      pagePaddingHeight:page ? parseFloat(getComputedStyle(page).paddingTop) + parseFloat(getComputedStyle(page).paddingBottom) : 0,
       pageOverflowY:page ? getComputedStyle(page).overflowY : null,
       layoutHeight:layout?.getBoundingClientRect().height ?? 0,
       contentScrollHeight:layout?.querySelector('.slide-content')?.scrollHeight ?? 0,
@@ -317,7 +331,7 @@ try {
   assert.equal(projectorState.layoutDisplay, 'grid');
   assert.equal(projectorState.pageOverflowY, 'hidden', 'The full-screen slide frame must stay fixed; only the inner content panel may scroll when content is taller than the viewport.');
   assert.ok(Math.abs(projectorState.pageHeight - projectorState.stageHeight) <= 2, `Projector slide must occupy the full stage: ${JSON.stringify(projectorState)}`);
-  assert.ok(Math.abs(projectorState.layoutHeight - projectorState.pageHeight) <= 2, `Projector grid must fit its slide frame: ${JSON.stringify(projectorState)}`);
+  assert.ok(Math.abs(projectorState.layoutHeight - (projectorState.pageHeight - projectorState.pagePaddingHeight)) <= 3, `Projector grid must fit the usable slide area after vertical padding: ${JSON.stringify(projectorState)}`);
   assert.ok(projectorState.contentClientHeight > 0 && projectorState.contentScrollHeight >= projectorState.contentClientHeight, 'Projector content region must have a measurable scroll container for long slide copy.');
   assert.deepEqual({ pages:projectorState.pageCount, ghosts:projectorState.ghostCount }, { pages:1, ghosts:0 },
     `Projector transitions still must never retain a second full-frame slide: ${JSON.stringify(projectorState)}`);

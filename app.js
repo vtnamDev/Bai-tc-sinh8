@@ -425,11 +425,65 @@
     const credit = String(slide.modelCredit || 'Mô hình sơ đồ minh họa BioSphere');
     const license = safeHttpUrl(slide.modelLicense || '');
     const licenseLabel = String(slide.modelLicenseLabel || 'Giấy phép mô hình');
+    const annotationGuides = {
+      tooth: {
+        title: 'CẤU TRÚC RĂNG',
+        items: [
+          ['Men răng', 'Lớp ngoài cứng giúp bảo vệ thân răng.'],
+          ['Ngà răng', 'Mô nằm dưới men răng, góp phần tạo cấu trúc chính của răng.'],
+          ['Tủy răng', 'Vùng mô mềm bên trong có mạch máu và thần kinh.'],
+          ['Liên hệ sâu răng', 'Axit do vi khuẩn tạo ra từ đường có thể làm men răng mất khoáng. Mẫu này không đánh dấu riêng ổ sâu.']
+        ]
+      },
+      stomach: {
+        title: 'DẠ DÀY VÀ NIÊM MẠC',
+        items: [
+          ['Thân dạ dày', 'Nơi chứa và nhào trộn thức ăn trong quá trình tiêu hóa.'],
+          ['Niêm mạc', 'Lớp lót phía trong, góp phần bảo vệ thành dạ dày.'],
+          ['Liên hệ loét', 'Tổn thương loét được giải thích bằng ảnh và sơ đồ riêng, không phải điểm đánh dấu trên mô hình này.']
+        ]
+      },
+      intestine: {
+        title: 'RUỘT NON VÀ HẤP THU',
+        items: [
+          ['Ruột non', 'Tham gia tiêu hóa và hấp thu phần lớn chất dinh dưỡng.'],
+          ['Niêm mạc ruột', 'Bề mặt bên trong giúp tăng diện tích tiếp xúc cho hấp thu.'],
+          ['Liên hệ tiêu chảy', 'Tiêu chảy có thể gây mất nước và chất điện giải; mô hình không mô tả tác nhân gây bệnh.']
+        ]
+      },
+      worm: {
+        title: 'GIUN VÀ ĐƯỜNG LÂY',
+        items: [
+          ['Giun đường ruột', 'Một số loài giun có thể ký sinh trong ruột người.'],
+          ['Đường lây', 'Con đường lây phụ thuộc loài giun; không phải mọi loài đều có cùng vòng đời.'],
+          ['Phòng tránh', 'Giữ vệ sinh tay, nước và thực phẩm; trao đổi với người lớn hoặc nhân viên y tế khi cần.']
+        ]
+      },
+      liver: {
+        title: 'GAN VÀ VIÊM GAN A',
+        items: [
+          ['Gan', 'Cơ quan tham gia chuyển hóa và xử lý nhiều chất trong cơ thể.'],
+          ['Virus HAV', 'Virus viêm gan A lây chủ yếu qua đường phân–miệng và gây viêm gan.'],
+          ['Giới hạn mô hình', 'Mô hình dùng để định vị cơ quan; không hiển thị virus hay mức độ tổn thương.']
+        ]
+      }
+    };
+    const annotationGuide = annotationGuides[type] || {
+      title: 'GỢI Ý QUAN SÁT',
+      items: [['Quan sát mô hình', 'Đối chiếu hình dạng, vị trí và vai trò của cơ quan với nội dung trên slide.']]
+    };
+    const annotationsHtml = '<button type="button" class="anatomy3d-annotation-toggle" data-model-action="annotations" aria-expanded="false" aria-controls="anatomy3d-annotations">✦ Chú thích</button>' +
+      '<section class="anatomy3d-annotation-panel" id="anatomy3d-annotations" aria-label="Chú thích liên hệ bài học" hidden>' +
+        '<div class="anatomy3d-annotation-heading"><span>GỢI Ý QUAN SÁT</span><strong>' + escapeHTML(annotationGuide.title) + '</strong></div>' +
+        '<ul>' + annotationGuide.items.map(item => '<li><strong>' + escapeHTML(item[0]) + '</strong><span>' + escapeHTML(item[1]) + '</span></li>').join('') + '</ul>' +
+        '<p>Chú thích liên hệ kiến thức; không phải điểm ghim tọa độ trên mô hình.</p>' +
+      '</section>';
     return '<aside class="anatomy3d-panel' + (modelEmbed ? ' anatomy3d-panel--embed' : '') + '" data-anatomy3d="' + escapeHTML(type) + '"' +
       (modelSrc ? ' data-model-src="' + escapeHTML(modelSrc) + '"' : '') +
       (modelEmbed ? ' data-model-embed="' + escapeHTML(modelEmbed) + '"' : '') +
       ' data-model-title="' + escapeHTML(title) + '" aria-label="' + escapeHTML(title) + '">' +
       '<div class="anatomy3d-topline"><span>BIOSPHERE / 3D</span><span class="anatomy3d-status" role="status" aria-live="polite">Sẵn sàng mở mô hình</span></div>' +
+      annotationsHtml +
       (image ? '<img class="anatomy3d-fallback" data-fallback-src="' + escapeHTML(image) + '" alt="' + escapeHTML(alt) + '" decoding="async" loading="lazy">' : '') +
       '<div class="anatomy3d-native-slot"></div>' +
       '<div class="anatomy3d-canvas" aria-hidden="true"></div>' +
@@ -499,6 +553,13 @@
     if (!model) return;
     activeAnatomy3D = null;
     delete model.panel.dataset.modelInitializing;
+    const annotationPanel = model.panel.querySelector('.anatomy3d-annotation-panel');
+    const annotationToggle = model.panel.querySelector('[data-model-action="annotations"]');
+    if (annotationPanel) annotationPanel.hidden = true;
+    if (annotationToggle) {
+      annotationToggle.setAttribute('aria-expanded', 'false');
+      annotationToggle.textContent = '✦ Chú thích';
+    }
     if (model.kind === 'embed') {
       window.clearTimeout(model.timeoutId);
       model.iframe?.removeEventListener('biosphere-viewer-ready', model.onReady);
@@ -997,6 +1058,15 @@
     const model = activeAnatomy3D;
     if (!panel || !model || model.panel !== panel) return;
     const action = button.dataset.modelAction;
+    if (action === 'annotations') {
+      const annotationPanel = panel.querySelector('.anatomy3d-annotation-panel');
+      if (!annotationPanel) return;
+      const expanded = button.getAttribute('aria-expanded') !== 'true';
+      annotationPanel.hidden = !expanded;
+      button.setAttribute('aria-expanded', String(expanded));
+      button.textContent = expanded ? 'Ẩn chú thích' : '✦ Chú thích';
+      return;
+    }
     if (model.kind === 'native') {
       const viewer = model.viewer;
       if (action === 'rotate') {
