@@ -227,8 +227,17 @@ try {
   assert.ok(Number.parseFloat(embedFallbackState.fallbackOpacity) >= 0.95, 'A cited image must become fully visible after the fallback transition.');
   const fallbackCredit = embeddedModel.locator('.anatomy3d-fallback-credit');
   await fallbackCredit.waitFor({ state: 'visible', timeout: 1500 });
-  assert.ok((await fallbackCredit.textContent()).includes('Suyash.dwivedi'), 'Fallback image credit must be visible when the image is used.');
-  assert.ok(await fallbackCredit.locator('a[href="https://creativecommons.org/licenses/by-sa/4.0/"]').count() === 1, 'Fallback image license must be linked independently from the 3D model license.');
+  const activeModelType = await embeddedModel.getAttribute('data-anatomy3d');
+  const activeSlideData = await page.evaluate(type => {
+    const deck = window.BIO_SCIENCE_DECK;
+    return deck?.slides?.find(slide => slide.model3D === type) || null;
+  }, activeModelType);
+  const fallbackCreditText = await fallbackCredit.textContent();
+  assert.ok(activeSlideData?.modelFallbackCredit && fallbackCreditText.includes(activeSlideData.modelFallbackCredit),
+    `Fallback credit must match the active ${activeModelType} model metadata: ${fallbackCreditText}`);
+  const fallbackLicense = activeSlideData?.modelFallbackLicense;
+  assert.ok(fallbackLicense && await fallbackCredit.locator('a').evaluateAll((links, expected) => links.some(link => link.href === new URL(expected, location.href).href), fallbackLicense),
+    'Fallback image license must match the active image license, independently from the 3D model license.');
   await page.screenshot({ path: `${outputDir}/mobile-model-view.png` });
   const annotationToggle = embeddedModel.locator('[data-model-action="annotations"]');
   await annotationToggle.click();
