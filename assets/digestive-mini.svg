@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360" role="img" aria-labelledby="title desc">
+  <title id="title">Minh họa biểu tượng hệ tiêu hóa</title>
+  <desc id="desc">Minh họa giáo dục dạng vector, sử dụng hình khối mềm và màu pastel để gợi tả các cơ quan chính của hệ tiêu hóa.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffaf0"/><stop offset="1" stop-color="#f2e3bc"/></linearGradient>
+    <linearGradient id="stomach" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2b2a4"/><stop offset="1" stop-color="#d77e76"/></linearGradient>
+    <linearGradient id="liver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8a65b"/><stop offset="1" stop-color="#b98235"/></linearGradient>
+    <linearGradient id="gut" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7d8a0"/><stop offset="1" stop-color="#e9b85f"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="8" flood-color="#95702d" flood-opacity=".13"/></filter>
+  </defs>
+  <rect width="480" height="360" rx="28" fill="url(#paper)"/>
+  <circle cx="240" cy="177" r="126" fill="#fffdf7" opacity=".8"/>
+  <circle cx="240" cy="177" r="103" fill="none" stroke="#dfc98e" stroke-width="1.5" stroke-dasharray="3 8"/>
+  <g fill="#d5ae58">
+    <path d="M82 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+    <path d="M386 88l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+    <circle cx="374" cy="260" r="4"/><circle cx="112" cy="270" r="3"/>
+  </g>
+  <g filter="url(#shadow)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Abstract oesophagus -->
+    <path d="M246 61c-1 20-2 36 8 49 7 8 15 13 19 23" fill="none" stroke="#d99083" stroke-width="16"/>
+    <path d="M246 61c-1 20-2 36 8 49 7 8 15 13 19 23" fill="none" stroke="#f5c7b9" stroke-width="5"/>
+    <!-- Liver -->
+    <path d="M174 116c-16-14-42-10-55 4-14 16-12 39 3 53 17 16 44 15 67 10 23-5 39-2 50-14 12-14 5-31-11-39-18-10-35-2-54-14z" fill="url(#liver)" stroke="#a87531" stroke-width="2"/>
+    <path d="M184 132c7 12 7 25 2 40" fill="none" stroke="#f2d49a" stroke-width="3" opacity=".8"/>
+    <!-- Stomach -->
+    <path d="M271 128c-4 16 5 29 17 39 12 10 24 10 23 25-2 18-19 30-40 27-23-3-41-20-42-42-1-14 6-24 6-36 0-9-5-18-4-27 2-12 11-20 21-18 10 2 15 11 19 32z" fill="url(#stomach)" stroke="#b96867" stroke-width="2"/>
+    <path d="M270 143c-3 10 1 18 12 26 9 7 12 13 6 22-5 8-16 11-27 6" fill="none" stroke="#f9d5c7" stroke-width="4" opacity=".85"/>
+    <!-- Small intestine: simple ribbon coils -->
+    <path d="M197 202c-20-4-27 7-21 18 5 10 20 7 31 4 14-4 20 3 14 11-7 8-24-1-35 7-10 7-5 18 7 19 12 1 17-10 29-9 12 1 16 11 8 18-8 7-23 3-30 12-6 8 0 17 10 16 11-1 18-10 29-10 12 0 18 8 13 15" fill="none" stroke="#ce8e43" stroke-width="24"/>
+    <path d="M197 202c-20-4-27 7-21 18 5 10 20 7 31 4 14-4 20 3 14 11-7 8-24-1-35 7-10 7-5 18 7 19 12 1 17-10 29-9 12 1 16 11 8 18-8 7-23 3-30 12-6 8 0 17 10 16 11-1 18-10 29-10 12 0 18 8 13 15" fill="none" stroke="url(#gut)" stroke-width="15"/>
+    <!-- Large intestine outline -->
+    <path d="M181 205c-8-11-6-20 5-24 14-5 33-2 47-2h28c17 0 32 7 32 23v49c0 13-8 21-21 21h-14" fill="none" stroke="#c98756" stroke-width="20"/>
+    <path d="M181 205c-8-11-6-20 5-24 14-5 33-2 47-2h28c17 0 32 7 32 23v49c0 13-8 21-21 21h-14" fill="none" stroke="#f2c999" stroke-width="12"/>
+    <path d="M178 213l-4 13c-1 7 4 11 11 12" fill="none" stroke="#f2c999" stroke-width="10"/>
+  </g>
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="800" letter-spacing="1.7" fill="#8c6d30">
+    <text x="28" y="327">BIOLOGY · VISUAL NOTE</text>
+    <text x="452" y="327" text-anchor="end">KHTN 8</text>
+  </g>
+</svg>

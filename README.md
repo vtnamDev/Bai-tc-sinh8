@@ -5,10 +5,12 @@ Website trình chiếu khoa học có bố cục biên tập riêng cho máy tí
 ## Cấu trúc
 - `index.html` — thư viện bài trình chiếu, mẫu, thiết lập và khung trình chiếu.
 - `styles.css` — giao diện responsive nhiều bảng màu, bố cục ảnh editorial, hiệu ứng chiều sâu và chuyển động.
+- `editorial-light.css` và `workspace-polish.css` — lớp màu kem/vàng, chi tiết dễ thương, tinh chỉnh responsive; lớp polish được tách riêng để giữ phần giao diện nền dễ bảo trì và có giới hạn dung lượng.
 - `app.js` — thư viện, tìm kiếm, nhập/xuất JSON, điều hướng slide, chia sẻ link, toàn màn hình; dữ liệu nhập được kiểm tra cấu trúc và URL tài nguyên chỉ chấp nhận HTTP(S).
 - `scripts/smoke-test.mjs` và `.github/workflows/static-validation.yml` — kiểm tra tự động cú pháp, cấu trúc bài, URL tài nguyên và phiên bản cache của các tệp tĩnh.
 - `bai32-deck.js` — dữ liệu 25 slide, kịch bản 5 bệnh, tình huống hỏi đáp, URL hình ảnh/video, chú thích và nguồn tham khảo.
 - `assets/mark.svg` — biểu tượng BioSphere.
+- `docs/ui-foundation-plan.md` — lộ trình kiểm thử UI, hiệu năng và phát hành qua Vercel.
 - `vercel.json` — cấu hình hosting tĩnh.
 
 ## Video nền trực tuyến

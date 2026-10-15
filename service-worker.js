@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-cream-cinematic-models-v21';
+const SHELL_VERSION = '20261015-cream-cinematic-models-v24-foundation';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [
@@ -8,10 +8,12 @@ const SHELL_URLS = [
   './index.html',
   './styles.css?v=' + SHELL_VERSION,
   './editorial-light.css?v=' + SHELL_VERSION,
+  './workspace-polish.css?v=' + SHELL_VERSION,
   './bai32-deck.js?v=' + SHELL_VERSION,
   './model-embed.js?v=' + SHELL_VERSION,
   './app.js?v=' + SHELL_VERSION,
   './assets/mark.svg',
+  './assets/digestive-mini.svg',
   './assets/team/animal-wolf.svg',
   './assets/team/animal-cat.svg',
   './assets/team/animal-rabbit.svg',
@@ -26,10 +28,12 @@ const SHELL_PATHS = new Set([
   new URL('./index.html', SCOPE_URL).pathname,
   new URL('./styles.css', SCOPE_URL).pathname,
   new URL('./editorial-light.css', SCOPE_URL).pathname,
+  new URL('./workspace-polish.css', SCOPE_URL).pathname,
   new URL('./bai32-deck.js', SCOPE_URL).pathname,
   new URL('./model-embed.js', SCOPE_URL).pathname,
   new URL('./app.js', SCOPE_URL).pathname,
   new URL('./assets/mark.svg', SCOPE_URL).pathname,
+  new URL('./assets/digestive-mini.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-wolf.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-cat.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-rabbit.svg', SCOPE_URL).pathname,
