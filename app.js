@@ -273,7 +273,6 @@
   function toast(message) {
     const region = $('#toastRegion');
     if (!region) return;
-    // Reuse one live announcement so rapid setting changes never stack or overlap toasts.
     let item = region.querySelector('.toast');
     if (!item) {
       item = document.createElement('div');
@@ -1408,7 +1407,6 @@
         }
       };
       video.addEventListener('loadeddata', startVideo, { once: true });
-      // The poster image paints first. Attach the MP4 only after the active slide is eligible for motion.
       if (canShowVideo()) {
         const deferredSource = video.querySelector('source[data-src]');
         if (deferredSource && !deferredSource.getAttribute('src')) {
@@ -1466,7 +1464,6 @@
     const profile = getPerformanceProfile();
     if (!profile.online || profile.saveData || profile.slowConnection) return;
     const slides = Array.isArray(currentDeck.slides) ? currentDeck.slides : [];
-    // Warm the next image early; retain at most one decoded image on phones and two on desktop cinema.
     const capacity = profile.lite ? 1 : (performanceMode === 'cinema' && window.innerWidth >= 900 ? 2 : 1);
     photoWarmTimer = window.setTimeout(() => {
       photoWarmTimer = 0;
@@ -1727,7 +1724,6 @@
     const lineBuckets = Array.from({ length: 6 }, () => []);
     const dotBuckets = [[], []];
 
-    // Update all particles before measuring edges; keep motion smooth with fewer, batched canvas calls.
     for (const particle of atmosphereParticles) {
       particle.x += particle.vx + (atmospherePointer.x * atmosphereWidth - particle.x) * 0.000008;
       particle.y += particle.vy + Math.sin(time + particle.phase) * 0.12;
@@ -1822,8 +1818,6 @@
       : (!previousPage ? 'opening' : (previousStoryGroup === storyGroup ? 'continuity' : 'chapter'));
     const motionPreset = slide.motionPreset || (motionBridge === 'continuity' ? 'depth' : 'rise');
 
-    // The previous page will be removed immediately by the stage replacement below.
-    // Never clone a full slide or leave a second image/media decoder alive during transitions.
     if (transitionCleanupTimer) window.clearTimeout(transitionCleanupTimer);
     transitionCleanupTimer = 0;
     if (activeTransitionGhost?.isConnected) activeTransitionGhost.remove();
@@ -1887,7 +1881,6 @@
     stage.dataset.preset = motionPreset;
     stage.dataset.slideIndex = String(slideIndex + 1);
     stage.dataset.slideCount = String(slides.length);
-    // Stop outgoing video before replacing the slide; otherwise decoders may overlap during transitions.
     $$('.live-video', stage).forEach(video => {
       video.pause();
       video.querySelectorAll('source').forEach(source => source.removeAttribute('src'));
@@ -1906,9 +1899,17 @@
           (isTeamSlide ? '' : '<div class="slide-side-content">' + (slide.model3D ? renderMediaWithModel(slide) : (slide.image ? renderPhoto(slide) : (slide.visual ? renderVisual(slide.visual) : ''))) + '</div>') +
         '</div>' +
       '</article>';
+    if(motionBridge!=='instant'&&motionEnabled&&!reducedMotion.matches){
+      const transitionLayer=document.createElement('div');
+      transitionLayer.className='slide-transition-layer';
+      transitionLayer.dataset.transition=motionBridge;
+      transitionLayer.dataset.direction=direction;
+      transitionLayer.setAttribute('aria-hidden','true');
+      transitionLayer.addEventListener('animationend',event=>{if(event.animationName==='fourxt-transition-wash')transitionLayer.remove()});
+      stage.appendChild(transitionLayer);
+    }
     stage.dataset.slideIndex = String(slideIndex + 1);
 
-    // There is no outgoing ghost to clean up: the old page was removed immediately above.
     attachLiveImageFallbacks(stage);
     attachVideoBackgrounds(stage);
     initInteractiveModels(stage);
@@ -2246,7 +2247,6 @@
     updatePerformanceUI();
   }
 
-  // Shared event delegation avoids accumulating listeners when the library rerenders.
   document.addEventListener('click', event => {
     const target = event.target.closest('button');
     if (!target) return;

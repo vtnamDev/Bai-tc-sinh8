@@ -140,6 +140,9 @@ try {
       ghosts:el.querySelectorAll(':scope > .slide-transition-ghost').length,
       activePages:el.querySelectorAll(':scope > .slide-page:not(.slide-transition-ghost)').length,
       duration:page ? getComputedStyle(page).animationDuration : '',
+      transition:el.querySelector('.slide-transition-layer')?.dataset.transition || null,
+      sweepAnimation:el.querySelector('.slide-transition-layer') ? getComputedStyle(el.querySelector('.slide-transition-layer'),'::before').animationName : '',
+      sweepDuration:el.querySelector('.slide-transition-layer') ? getComputedStyle(el.querySelector('.slide-transition-layer'),'::before').animationDuration : '',
     };
   });
   assert.deepEqual(
@@ -147,8 +150,12 @@ try {
     {pages:1,ghosts:0,activePages:1},
     `Navigation must replace the old slide immediately; no saved screenshot or full-size image may remain layered: ${JSON.stringify(oneSurfaceState)}`
   );
-  assert.ok(Number.parseFloat(oneSurfaceState.duration) <= .35,
-    `Incoming slide animation should finish quickly, not keep the presenter feeling stuck: ${JSON.stringify(oneSurfaceState)}`);
+  assert.equal(oneSurfaceState.transition, 'continuity', 'Same-chapter navigation must show a visible transition layer.');
+  assert.equal(oneSurfaceState.sweepAnimation, 'fourxt-transition-sweep', 'The continuity transition must sweep a light streak across the slide.');
+  assert.ok(Number.parseFloat(oneSurfaceState.duration) <= .5,
+    `Incoming continuity motion should finish quickly, not keep the presenter feeling stuck: ${JSON.stringify(oneSurfaceState)}`);
+  assert.ok(Number.parseFloat(oneSurfaceState.sweepDuration) >= .3 && Number.parseFloat(oneSurfaceState.sweepDuration) <= .5,
+    `The transition sweep should be perceptible but short: ${JSON.stringify(oneSurfaceState)}`);
   await stage.click({ position: { x: Math.round(stageBounds.width * 0.16), y: Math.round(stageBounds.height * 0.5) } });
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '01 / 25');
   const presentationWidth = await page.evaluate(() => ({
@@ -173,6 +180,10 @@ try {
       }));
       assert.deepEqual(chapterState, { storyGroup:'tooth', bridge:'chapter', palette:'coral' },
         `Entering a new disease should use its own accent and chapter transition: ${JSON.stringify(chapterState)}`);
+      const chapterEffect=await page.locator('#slideStage > .slide-transition-layer').evaluate(el=>({type:el.dataset.transition,sweep:getComputedStyle(el,'::before').animationName,duration:getComputedStyle(el,'::before').animationDuration}));
+      assert.equal(chapterEffect.type,'chapter','Crossing into a disease chapter must use the richer chapter transition.');
+      assert.equal(chapterEffect.sweep,'fourxt-transition-sweep','Chapter transition must include the camera-like light sweep.');
+      assert.ok(Number.parseFloat(chapterEffect.duration)>=.5 && Number.parseFloat(chapterEffect.duration)<=.8,`Chapter sweep should be cinematic without delaying narration: ${JSON.stringify(chapterEffect)}`);
       assert.equal(await page.locator('#slideStage > .slide-page').count(), 1,
         'Entering a new chapter must not keep the outgoing page in the DOM.');
       assert.equal(await page.locator('#slideStage > .slide-transition-ghost').count(), 0,
