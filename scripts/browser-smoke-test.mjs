@@ -17,6 +17,19 @@ page.on('pageerror', error => pageErrors.push(error.message));
 try {
   await page.goto(baseURL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.locator('#heroSample').waitFor({ state: 'visible', timeout: 10000 });
+  await page.locator('.hero-digestive-illustration').evaluate(img => img.decode());
+  const localDigestiveArt = await page.locator('.hero-digestive-illustration').evaluate(img => ({
+    width: img.naturalWidth, height: img.naturalHeight, src: new URL(img.currentSrc || img.src).pathname,
+  }));
+  assert.deepEqual(localDigestiveArt, {
+    width: 480, height: 360, src: '/assets/digestive-mini.svg',
+  }, `The hero's anatomy visual should use a fast local SVG, not depend on an external host: ${JSON.stringify(localDigestiveArt)}`);
+  const mobileHeroLines = await page.locator('.hero-copy h1 em').evaluate(el => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return range.getClientRects().length;
+  });
+  assert.equal(mobileHeroLines, 1, 'The phrase “Một trải nghiệm.” should remain on one line on phone screens.');
 
   // Capture the actual workspace, not only settings and presentation views.
   const mobileLibraryBounds = await page.evaluate(() => ({
@@ -34,6 +47,14 @@ try {
   desktopPage.on('pageerror', error => pageErrors.push(error.message));
   await desktopPage.goto(baseURL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await desktopPage.locator('#heroSample').waitFor({ state: 'visible', timeout: 10000 });
+  const desktopHeroLines = await desktopPage.locator('.hero-copy h1 em').evaluate(el => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return range.getClientRects().length;
+  });
+  assert.equal(desktopHeroLines, 1, 'The phrase “Một trải nghiệm.” should remain on one line at desktop width.');
+  const deckTitleColor = await desktopPage.locator('.deck-card .cover-title').evaluate(el => getComputedStyle(el).color);
+  assert.equal(deckTitleColor, 'rgb(255, 253, 246)', `Deck-cover title needs strong light-theme contrast, got ${deckTitleColor}.`);
   await desktopPage.screenshot({ path: `${outputDir}/desktop-library-home.png`, fullPage: true });
   const desktopLibraryBounds = await desktopPage.evaluate(() => ({
     viewport: window.innerWidth,
@@ -75,7 +96,7 @@ try {
   await page.locator('#mainNav [data-view="library"]').click();
   await page.locator('#heroSample').click();
   await page.locator('#presentationViewer').waitFor({ state: 'visible', timeout: 10000 });
-  await page.waitForTimeout(250);
+  await page.waitForTimeout(650);
   const initialPresentationState = await page.evaluate(() => ({
     caption: document.querySelector('#viewerSlideCaption')?.textContent?.trim() || null,
     title: document.querySelector('#slideStage .slide-title')?.textContent?.trim() || null,
@@ -90,6 +111,14 @@ try {
   // The counter is intentionally visually hidden on narrow phones to preserve slide space.
   assert.equal((await page.locator('#viewerSlideCaption').textContent()).trim(), '01 / 25');
   await page.locator('#slideStage .photo-frame').waitFor({ state: 'visible' });
+  const mobileCopySurface = await page.locator('#slideStage > .slide-page:not(.slide-transition-ghost) > .slide-layout > .slide-content:not(.slide-content--team)').evaluate(el => ({
+    color: getComputedStyle(el).color,
+    backgroundImage: getComputedStyle(el).backgroundImage,
+  }));
+  assert.equal(mobileCopySurface.color, 'rgb(52, 45, 34)',
+    `Mobile slide copy should use accessible dark-brown text on the cream surface: ${JSON.stringify(mobileCopySurface)}`);
+  assert.ok(mobileCopySurface.backgroundImage.includes('rgb(255, 254, 250)'),
+    `Mobile slide copy should be on an ivory surface, not the legacy dark-teal card: ${JSON.stringify(mobileCopySurface)}`);
   const mobileEditorialLayout = await page.evaluate(() => {
     const stage = document.querySelector('#slideStage');
     const image = stage?.querySelector('.photo-frame');
