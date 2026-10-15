@@ -98,7 +98,7 @@ assert.equal(new Set(assetVersions).size, 1, 'CSS, deck data and app code must u
 const workerVersion = serviceWorker.match(/const SHELL_VERSION = '([^']+)'/)?.[1];
 assert.equal(workerVersion, assetVersions[0], 'The service-worker shell cache must match the current HTML asset version.');
 assert.equal((css.match(/\{/g) || []).length, (css.match(/\}/g) || []).length, 'CSS block braces must remain balanced.');
-assert.equal((polishCss.match(/\\{/g) || []).length, (polishCss.match(/\\}/g) || []).length, 'UI polish CSS block braces must remain balanced.');
+assert.equal(polishCss.split('{').length, polishCss.split('}').length, 'UI polish CSS block braces must remain balanced.');
 assert.ok(polishCss.includes('.study-buddy-sticker') && polishCss.includes('prefers-reduced-motion:reduce'), 'Cute UI details must remain small and respect reduced motion.');
 assert.match(html, /class="hero-photo-img"[^>]*loading="eager"[^>]*fetchpriority="high"/, 'The primary hero image should be prioritized without preloading heavy slide media.');
 
