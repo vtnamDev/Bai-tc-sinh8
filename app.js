@@ -1905,7 +1905,7 @@
       transitionLayer.dataset.transition=motionBridge;
       transitionLayer.dataset.direction=direction;
       transitionLayer.setAttribute('aria-hidden','true');
-      transitionLayer.addEventListener('animationend',event=>{if(event.animationName==='fourxt-transition-wash')transitionLayer.remove()});
+      transitionLayer.addEventListener('animationend',event=>{if(event.animationName==='fourxt-transition-sweep')transitionLayer.remove()});
       stage.appendChild(transitionLayer);
     }
     stage.dataset.slideIndex = String(slideIndex + 1);
