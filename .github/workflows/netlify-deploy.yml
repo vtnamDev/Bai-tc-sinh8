@@ -65,6 +65,8 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: |
           netlify deploy \
+            --debug \
+            --no-build \
             --prod \
             --dir "$RUNNER_TEMP/netlify-publish" \
             --site "$NETLIFY_SITE_ID" \
