@@ -41,6 +41,13 @@ assert.ok(deck && typeof deck === 'object', 'The bundled seed deck must exist.')
 assert.equal(deck.slides.length, 25, 'The lesson deck should contain 25 slides.');
 assert.ok(deck.slides.every(slide => slide && typeof slide.title === 'string'), 'Every slide needs a title.');
 assert.equal(deck.slides.filter(slide => typeof slide.keyIdea === 'string' && slide.keyIdea.length > 20).length, 25, 'Every slide must declare one concise core idea.');
+const closingSlide = deck.slides.at(-1);
+assert.equal(closingSlide.storyGroup, 'closing', 'The lesson must end with its dedicated closing slide.');
+assert.match(closingSlide.kicker, /LỜI CẢM ƠN/i, 'The closing page must be clearly labeled as a thank-you slide.');
+assert.match(closingSlide.title, /cô và các bạn/i, 'The closing title must thank both the teacher and classmates.');
+assert.ok(closingSlide.points.some(point => /cô giáo/i.test(point)), 'The closing page must thank the teacher directly.');
+assert.ok(closingSlide.points.some(point => /thành viên Tổ 4/i.test(point)), 'The closing page must recognize the team members.');
+assert.ok(closingSlide.points.some(point => /Kính chúc cô sức khỏe/i.test(point)), 'The closing page must include a polite wish for the teacher and classmates.');
 const chapterPalettes = new Map();
 for (const slide of deck.slides) {
   assert.ok(typeof slide.storyGroup === 'string' && slide.storyGroup.length > 0, `Slide is missing its story group: ${slide.title}`);
