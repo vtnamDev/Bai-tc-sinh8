@@ -2,6 +2,8 @@
 
 Website trình chiếu khoa học có bố cục biên tập riêng cho máy tính/TV ngang và điện thoại dọc; nội dung cùng ảnh được thiết kế thành hai vùng độc lập. Bài mẫu hiện có 25 trang về **5 bệnh liên quan đến hệ tiêu hóa** theo chủ đề “Dinh dưỡng và tiêu hóa ở người” — SGK Khoa học Tự nhiên 8, tập 1, Bài 32.
 
+Trang 25 khép lại bằng lời cảm ơn riêng gửi cô giáo và các thành viên Tổ 4, cùng lời chúc cô sức khỏe và các bạn học tốt.
+
 ## Cấu trúc
 - `index.html` — thư viện bài trình chiếu, mẫu, thiết lập và khung trình chiếu.
 - `styles.css` — giao diện responsive nhiều bảng màu, bố cục ảnh editorial, hiệu ứng chiều sâu và chuyển động.
