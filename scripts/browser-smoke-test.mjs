@@ -56,6 +56,8 @@ try {
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
   await page.keyboard.press('ArrowLeft');
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '01 / 25');
+  // Side-hit navigation controls are intentionally hidden on narrow phone layouts.
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.locator('#slideNext').click();
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
   assert.equal(await page.evaluate(() => document.activeElement?.id), 'slideStage',
@@ -66,6 +68,7 @@ try {
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
   await page.keyboard.press('ArrowLeft');
   await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '01 / 25');
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(250);
   const initialPresentationState = await page.evaluate(() => ({
     caption: document.querySelector('#viewerSlideCaption')?.textContent?.trim() || null,
