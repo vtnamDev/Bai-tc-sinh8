@@ -182,16 +182,16 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
 #presentationViewer #slideStage .quiz-action-primary{color:#fffdf7!important;background:linear-gradient(110deg,#9b792f,#c7a454)!important}
 
 /* Soft, themed stationery stickers stay behind the content grid and never capture clicks. */
-#presentationViewer #slideStage .slide-page:not([data-visual=team])::before,
-#presentationViewer #slideStage .slide-page:not([data-visual=team])::after{
+#presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::before,
+#presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::after{
   position:absolute;z-index:1;display:grid;place-items:center;pointer-events:none;
   border:1px solid #e3d2a9;border-radius:16px;background:#fffdf4cc;
   box-shadow:0 8px 20px #94742a12;line-height:1;user-select:none
 }
-#presentationViewer #slideStage .slide-page:not([data-visual=team])::before{
+#presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::before{
   content:"🧬";top:18px;right:22px;width:45px;height:45px;font-size:23px;transform:rotate(7deg);opacity:.72
 }
-#presentationViewer #slideStage .slide-page:not([data-visual=team])::after{
+#presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::after{
   content:"✿";left:22px;bottom:18px;width:34px;height:34px;font-size:20px;color:#bd9850;transform:rotate(-9deg);opacity:.66
 }
 #presentationViewer #slideStage[data-slide-index="1"] .slide-page::before{content:"🧬"}
@@ -219,9 +219,35 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
 #presentationViewer #slideStage[data-slide-index="24"] .slide-page::before{content:"📚"}
 #presentationViewer #slideStage[data-slide-index="25"] .slide-page::before{content:"🌼"}
 @media(max-width:800px){
-  #presentationViewer #slideStage .slide-page:not([data-visual=team])::before{top:7px;right:7px;width:27px;height:27px;border-radius:10px;font-size:15px;opacity:.24}
-  #presentationViewer #slideStage .slide-page:not([data-visual=team])::after{left:5px;bottom:5px;width:22px;height:22px;font-size:13px;opacity:.24}
+  #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::before{top:7px;right:7px;width:27px;height:27px;border-radius:10px;font-size:15px;opacity:.24}
+  #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::after{left:5px;bottom:5px;width:22px;height:22px;font-size:13px;opacity:.24}
 }
 @media(prefers-reduced-motion:reduce){
   #presentationViewer #slideStage .slide-page::before,#presentationViewer #slideStage .slide-page::after{transform:none!important}
+}
+
+
+/* Lift the anatomy scenes into the same soft, legible light art direction. */
+#presentationViewer .anatomy3d-panel{
+  color:#3a3327!important;
+  border-color:#e3d4b3!important;
+  background:radial-gradient(ellipse at 50% 30%,#f8edcf 0%,transparent 46%),linear-gradient(145deg,#fffdf7,#f4ead4 78%,#fbf7ec)!important;
+  box-shadow:0 18px 42px #8c702312,inset 0 1px #fff!important
+}
+#presentationViewer .anatomy3d-panel:before,#presentationViewer .anatomy3d-panel:after{border-color:#c9b16c75!important}
+#presentationViewer .anatomy3d-topline>span:first-child{color:#8a671b!important}
+#presentationViewer .anatomy3d-status{color:#78643b!important;background:#fff9e9dd!important;border-color:#e7d9b8!important;backdrop-filter:blur(8px)}
+#presentationViewer .anatomy3d-title{text-shadow:none!important}
+#presentationViewer .anatomy3d-title strong{color:#332d22!important}
+#presentationViewer .anatomy3d-title span{color:#675d4a!important}
+#presentationViewer .anatomy3d-controls button{color:#47391e!important;background:#fffaf0ed!important;border-color:#e2d0a6!important;backdrop-filter:blur(8px)}
+#presentationViewer .anatomy3d-controls button:hover{color:#3c4b2c!important;background:#f3f0df!important;border-color:#c9b16c!important}
+#presentationViewer .anatomy3d-controls button[aria-pressed=true]{color:#fffdf7!important;background:#9c792f!important;border-color:#9c792f!important}
+#presentationViewer .anatomy3d-attribution{color:#786d56!important}
+#presentationViewer .anatomy3d-attribution a{color:#87651c!important}
+#presentationViewer .anatomy3d-footnote{color:#7e7155!important}
+#presentationViewer .anatomy3d-native-viewer{--progress-bar-color:#ad8736;--progress-mask:#f6efdF}
+@media(max-width:800px){
+  #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::before{top:7px;right:7px;width:27px;height:27px;border-radius:10px;font-size:15px;opacity:.24}
+  #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::after{left:5px;bottom:5px;width:22px;height:22px;font-size:13px;opacity:.24}
 }
