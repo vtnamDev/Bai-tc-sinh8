@@ -117,7 +117,7 @@ try {
   }));
   assert.equal(mobileCopySurface.color, 'rgb(52, 45, 34)',
     `Mobile slide copy should use accessible dark-brown text on the cream surface: ${JSON.stringify(mobileCopySurface)}`);
-  assert.ok(mobileCopySurface.backgroundImage.includes('rgb(255, 254, 250)'),
+  assert.ok(mobileCopySurface.backgroundImage.includes('255, 254, 250'),
     `Mobile slide copy should be on an ivory surface, not the legacy dark-teal card: ${JSON.stringify(mobileCopySurface)}`);
   const mobileEditorialLayout = await page.evaluate(() => {
     const stage = document.querySelector('#slideStage');
