@@ -242,7 +242,12 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelFallbackCredit": "Suyash.dwivedi · Wikimedia Commons · CC BY-SA 4.0",
       "modelFallbackLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
       "modelFallbackLicenseLabel": "CC BY-SA 4.0",
-      "links": [{"label":"WHO · Sức khỏe răng miệng","url":"https://www.who.int/news-room/fact-sheets/detail/oral-health"}],
+      "links": [
+        {
+          "label": "WHO · Sức khỏe răng miệng",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/oral-health"
+        }
+      ],
       "flowVisual": {
         "label": "CƠ CHẾ SÂU RĂNG",
         "steps": [
@@ -379,7 +384,12 @@ window.BIOSPHERE_BAI32_SEED = {
         }
       ],
       "storyGroup": "stomach",
-      "links": [{"label":"NIDDK · Loét dạ dày và tá tràng","url":"https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers"}],
+      "links": [
+        {
+          "label": "NIDDK · Loét dạ dày và tá tràng",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers"
+        }
+      ],
       "keyIdea": "Loét dạ dày–tá tràng có nguyên nhân y khoa cụ thể, không thể kết luận chỉ từ thói quen ăn uống.",
       "modelEmbed": "https://sketchfab.com/models/e0f1952de7204654ba469c3e887a029b/embed?autostart=0&ui_theme=light&ui_infos=0&ui_controls=1&ui_hint=0&ui_watermark=1&dnt=1",
       "modelCredit": "Realistic Human Stomach · neshallads / Sketchfab · CC BY-NC 4.0",
@@ -538,7 +548,12 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelCredit": "Human Reference Atlas / HuBMAP · mô hình ruột non nam · CC BY 4.0",
       "modelLicense": "https://creativecommons.org/licenses/by/4.0/",
       "modelSourceUrl": "https://apps.humanatlas.io/kg-explorer/ref-organ/small-intestine-male/v1.2",
-      "links": [{"label":"WHO · Bệnh tiêu chảy","url":"https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease"}],
+      "links": [
+        {
+          "label": "WHO · Bệnh tiêu chảy",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease"
+        }
+      ],
       "flowVisual": {
         "label": "ƯU TIÊN AN TOÀN",
         "steps": [
@@ -690,7 +705,12 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelFallbackCredit": "Delorieux for Johann Gottfried Bremser · Wikimedia Commons · Public Domain Mark 1.0",
       "modelFallbackLicense": "https://creativecommons.org/publicdomain/mark/1.0/",
       "modelFallbackLicenseLabel": "Public Domain Mark 1.0",
-      "links": [{"label":"WHO · Nhiễm giun truyền qua đất","url":"https://www.who.int/news-room/fact-sheets/detail/soil-transmitted-helminth-infections"}],
+      "links": [
+        {
+          "label": "WHO · Nhiễm giun truyền qua đất",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/soil-transmitted-helminth-infections"
+        }
+      ],
       "flowVisual": {
         "label": "ĐƯỜNG LÂY CÓ THỂ GẶP",
         "steps": [
@@ -807,7 +827,12 @@ window.BIOSPHERE_BAI32_SEED = {
       "modelCredit": "Human Reference Atlas / HuBMAP · mô hình gan nam · CC BY 4.0",
       "modelLicense": "https://creativecommons.org/licenses/by/4.0/",
       "modelSourceUrl": "https://humanatlas.io/3d-reference-library",
-      "links": [{"label":"WHO · Viêm gan A","url":"https://www.who.int/news-room/fact-sheets/detail/hepatitis-a"}],
+      "links": [
+        {
+          "label": "WHO · Viêm gan A",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/hepatitis-a"
+        }
+      ],
       "flowVisual": {
         "label": "ĐƯỜNG LÂY VIÊM GAN A",
         "steps": [
@@ -1132,15 +1157,15 @@ window.BIOSPHERE_BAI32_SEED = {
       "keyIdea": "Ba nguyên tắc xuyên suốt: hiểu đúng, phòng ngừa có căn cứ và tìm trợ giúp khi có dấu hiệu cảnh báo."
     },
     {
-      "kicker": "LỜI KẾT",
-      "title": "Chúng em cảm ơn cô và các bạn đã lắng nghe!",
-      "subtitle": "Mong rằng sau bài học, mỗi bạn sẽ chọn được ít nhất một việc có thể thực hiện ngay: làm sạch răng đúng cách, rửa tay trước bữa ăn, dùng nước an toàn và báo người lớn khi có dấu hiệu đáng lo.",
+      "kicker": "LỜI CẢM ƠN · TỔ 4 · LỚP 8/1",
+      "title": "Chúng em xin cảm ơn cô và các bạn!",
+      "subtitle": "Tổ 4 – Lớp 8/1 xin gửi lời cảm ơn chân thành đến cô giáo và tất cả các bạn sau phần trình bày về năm bệnh liên quan đến hệ tiêu hóa.",
       "points": [
-        "Hiểu đúng nguyên nhân và đường lây để phòng bệnh tốt hơn.",
-        "Kết hợp thói quen lành mạnh với thông tin khoa học đáng tin cậy.",
-        "Chúng em xin cảm ơn cô và các bạn đã lắng nghe!"
+        "Chúng em xin chân thành cảm ơn cô giáo đã hướng dẫn và dành thời gian theo dõi bài báo cáo.",
+        "Cảm ơn tất cả thành viên Tổ 4 đã đóng góp ý tưởng, tìm kiếm tư liệu và cùng hoàn thành bài thuyết trình.",
+        "Kính chúc cô sức khỏe, chúc các bạn học tốt và luôn mạnh khỏe!"
       ],
-      "note": "HẾT BÀI · CÓ THỂ CHỌN XEM LẠI TỪ ĐẦU HOẶC TRỞ VỀ MỤC LỤC",
+      "note": "TỔ 4 · LỚP 8/1 · CẢM ƠN CÔ VÀ CÁC BẠN ĐÃ LẮNG NGHE",
       "visual": "closing",
       "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=85",
       "imageAlt": "Không khí lớp học khi kết thúc phần trình bày",
@@ -1156,7 +1181,7 @@ window.BIOSPHERE_BAI32_SEED = {
       "imageFit": "cover",
       "videoAlt": "Học sinh và giáo viên trong lớp học",
       "storyGroup": "closing",
-      "keyIdea": "Mỗi người có thể bắt đầu từ một việc thực tế hôm nay để bảo vệ sức khỏe hệ tiêu hóa."
+      "keyIdea": "Sự hướng dẫn của cô và tinh thần hợp tác của các thành viên đã giúp Tổ 4 hoàn thành bài báo cáo."
     }
   ]
 };
