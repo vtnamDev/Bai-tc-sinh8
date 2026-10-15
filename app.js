@@ -991,6 +991,26 @@
     }
   }
 
+
+  function renderTeamGallery(slide) {
+    const members = Array.isArray(slide.teamMembers) ? slide.teamMembers.slice(0, 8) : [];
+    if (!members.length) return '';
+    const validAnimals = new Set(['wolf', 'cat', 'rabbit', 'penguin', 'pink-cat', 'otter', 'fox', 'panda']);
+    const fallbackAnimals = ['wolf','cat','rabbit','penguin','pink-cat','otter','fox','panda'];
+    return '<section class="team-gallery" aria-label="Tám thành viên nhóm BioSphere Slides">' +
+      '<div class="team-gallery-caption"><span>GẶP GỠ NHÓM THỰC HIỆN</span><span>08 THÀNH VIÊN · 01 HÀNH TRÌNH</span></div>' +
+      '<div class="team-member-grid">' + members.map((member, index) => {
+        const animal = validAnimals.has(member?.animal) ? member.animal : fallbackAnimals[index % fallbackAnimals.length];
+        return '<article class="team-member-card" style="--member-index:' + index + '">' +
+          '<div class="team-member-avatar"><img src="/assets/team/animal-' + animal + '.svg" alt="" width="88" height="88" loading="eager" decoding="async"></div>' +
+          '<div class="team-member-copy"><span class="team-member-role">' + escapeHTML(member?.role || 'Thành viên') + '</span>' +
+          '<strong class="team-member-name">' + escapeHTML(member?.name || ('Thành viên ' + (index + 1))) + '</strong></div>' +
+        '</article>';
+      }).join('') + '</div>' +
+      '<div class="team-gallery-footer"><span>HỌC HỎI</span><i></i><span>HỢP TÁC</span><i></i><span>KHÁM PHÁ KHOA HỌC</span></div>' +
+    '</section>';
+  }
+
   function renderSlideVisualBoard(slide) {
     const visual = String(slide.visual || 'editorial');
     const title = String(slide.title || '');
@@ -1642,6 +1662,7 @@
     const slides = Array.isArray(currentDeck.slides) && currentDeck.slides.length ? currentDeck.slides : seedDeck.slides;
     slideIndex = Math.max(0, Math.min(slideIndex, slides.length - 1));
     const slide = slides[slideIndex];
+    const isTeamSlide = slide.visual === 'team' && Array.isArray(slide.teamMembers);
     if (!slide.interactiveQuiz) quizSession = { deckId: null, slideIndex: -1, questionIndex: 0, answers: {}, score: 0 };
 
     const stage = $('#slideStage');
@@ -1664,13 +1685,13 @@
     const keyIdea = typeof slide.keyIdea === 'string' && slide.keyIdea.trim()
       ? slide.keyIdea.trim()
       : (points[0] || slide.title || currentDeck.title);
-    const keyIdeaHtml = !slide.interactiveQuiz && points.length
+    const keyIdeaHtml = !isTeamSlide && !slide.interactiveQuiz && points.length
       ? '<section class="slide-key-idea" aria-label="Ý chính">' +
           '<div class="slide-key-idea-top"><span>Ý CHÍNH</span><b>TRỌNG TÂM</b></div>' +
           '<p>' + escapeHTML(keyIdea) + '</p>' +
         '</section>'
       : '';
-    const pointHtml = !slide.interactiveQuiz && points.length
+    const pointHtml = !isTeamSlide && !slide.interactiveQuiz && points.length
       ? '<section class="slide-support-ideas" aria-label="Các ý phụ">' +
           '<div class="slide-support-heading"><strong>Ý PHỤ</strong><span>Chi tiết, dẫn chứng và cách áp dụng</span></div>' +
           '<div class="slide-points">' + points.map((point, i) =>
@@ -1727,17 +1748,14 @@
     });
     stage.innerHTML =
       '<article class="slide-page" data-palette="' + escapeHTML(palette) + '" data-story-group="' + escapeHTML(storyGroup) + '" data-motion-bridge="' + escapeHTML(motionBridge) + '" data-visual="' + escapeHTML(slide.visual || 'editorial') + '" data-direction="' + escapeHTML(direction) + '" data-preset="' + escapeHTML(motionPreset) + '">' +
-        '<div class="slide-layout">' +
-          '<section class="slide-content">' +
+        '<div class="' + (isTeamSlide ? 'slide-layout slide-layout--team' : 'slide-layout') + '">' +
+          '<section class="' + (isTeamSlide ? 'slide-content slide-content--team' : 'slide-content') + '">' +
             '<div class="slide-kicker">' + escapeHTML(slide.kicker || 'BIOSPHERE / SLIDE') + '</div>' +
             '<h1 class="slide-title">' + escapeHTML(slide.title || currentDeck.title) + '</h1>' +
             '<p class="slide-subtitle">' + escapeHTML(slide.subtitle || 'Bổ sung sau khi kiểm chứng tài liệu.') + '</p>' +
-            keyIdeaHtml +
-            renderSlideVisualBoard(slide) +
-            (slide.model3D ? renderMediaModeBar('media-mode-bar--mobile') : '') +
-            pointHtml + promptHtml + quizHtml + endingHtml + sourceHtml + linksHtml +
+            (isTeamSlide ? renderTeamGallery(slide) : (keyIdeaHtml + renderSlideVisualBoard(slide) + (slide.model3D ? renderMediaModeBar('media-mode-bar--mobile') : '') + pointHtml + promptHtml + quizHtml + endingHtml + sourceHtml + linksHtml)) +
           '</section>' +
-          '<div class="slide-side-content">' + (slide.model3D ? renderMediaWithModel(slide) : (slide.image ? renderPhoto(slide) : (slide.visual ? renderVisual(slide.visual) : ''))) + '</div>' +
+          (isTeamSlide ? '' : '<div class="slide-side-content">' + (slide.model3D ? renderMediaWithModel(slide) : (slide.image ? renderPhoto(slide) : (slide.visual ? renderVisual(slide.visual) : ''))) + '</div>') +
         '</div>' +
       '</article>';
 
@@ -2046,7 +2064,7 @@
     $('#themeToggle').textContent = light ? '☀' : '◐';
     $('#settingsTheme').classList.toggle('on', light);
     $('#settingsTheme').setAttribute('aria-checked', String(light));
-    try { localStorage.setItem('biosphere-theme', theme); } catch { /* theme remains active this session */ }
+    try { localStorage.setItem('biosphere-theme-v2', theme); } catch { /* theme remains active this session */ }
   }
 
   function toggleTheme() {
@@ -2398,11 +2416,11 @@
   window.addEventListener('offline', () => setPerformanceMode(performanceMode, false));
 
   try {
-    const savedTheme = localStorage.getItem('biosphere-theme');
+    const savedTheme = localStorage.getItem('biosphere-theme-v2');
     if (savedTheme === 'light' || savedTheme === 'dark') setTheme(savedTheme);
-    else setTheme('dark');
+    else setTheme('light');
   } catch {
-    setTheme('dark');
+    setTheme('light');
   }
   renderDecks();
   try { soundEnabled = localStorage.getItem('biosphere-quiz-sound') !== 'off'; } catch { soundEnabled = true; }

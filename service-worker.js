@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-hdmi-projector-v15';
+const SHELL_VERSION = '20261015-editorial-light-team-v16';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [
@@ -10,6 +10,14 @@ const SHELL_URLS = [
   './bai32-deck.js?v=' + SHELL_VERSION,
   './app.js?v=' + SHELL_VERSION,
   './assets/mark.svg',
+  './assets/team/animal-wolf.svg',
+  './assets/team/animal-cat.svg',
+  './assets/team/animal-rabbit.svg',
+  './assets/team/animal-penguin.svg',
+  './assets/team/animal-pink-cat.svg',
+  './assets/team/animal-otter.svg',
+  './assets/team/animal-fox.svg',
+  './assets/team/animal-panda.svg',
 ];
 const SHELL_PATHS = new Set([
   new URL('./', SCOPE_URL).pathname,
@@ -18,6 +26,14 @@ const SHELL_PATHS = new Set([
   new URL('./bai32-deck.js', SCOPE_URL).pathname,
   new URL('./app.js', SCOPE_URL).pathname,
   new URL('./assets/mark.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-wolf.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-cat.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-rabbit.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-penguin.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-pink-cat.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-otter.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-fox.svg', SCOPE_URL).pathname,
+  new URL('./assets/team/animal-panda.svg', SCOPE_URL).pathname,
 ]);
 
 self.addEventListener('install', event => {
