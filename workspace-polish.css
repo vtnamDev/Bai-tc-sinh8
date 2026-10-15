@@ -1,12 +1,3 @@
-:root{
-  --bs-cream:#fffdf7;
-  --bs-paper:#fffaf0;
-  --bs-gold:#b88d31;
-  --bs-gold-deep:#89651d;
-  --bs-gold-pale:#f4e7c5;
-  --bs-line:#e8dcc1;
-  --bs-shadow:0 16px 42px #8d6e2410;
-}
 html[data-theme=light] body{
   background:
     radial-gradient(ellipse at 8% 4%,#f5e4b92d,transparent 28rem),
