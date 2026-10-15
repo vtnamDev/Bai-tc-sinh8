@@ -229,7 +229,7 @@ try {
   await fallbackCredit.waitFor({ state: 'visible', timeout: 1500 });
   const activeModelType = await embeddedModel.getAttribute('data-anatomy3d');
   const activeSlideData = await page.evaluate(type => {
-    const deck = window.BIO_SCIENCE_DECK;
+    const deck = window.BIOSPHERE_BAI32_SEED;
     return deck?.slides?.find(slide => slide.model3D === type) || null;
   }, activeModelType);
   const fallbackCreditText = await fallbackCredit.textContent();
