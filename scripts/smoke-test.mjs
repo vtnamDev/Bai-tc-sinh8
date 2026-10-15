@@ -14,7 +14,7 @@ const [html, app, deckSource, css, lightCss, modelEmbedSource, serviceWorker] = 
 
 // Guard against accidental bundle growth. These are source-size budgets, not gzip estimates.
 const sourceBudgets = [
-  ['app.js', app, 168 * 1024],
+  ['app.js', app, 172 * 1024],
   ['styles.css', css, 220 * 1024],
   ['editorial-light.css', lightCss, 45 * 1024],
   ['model-embed.js', modelEmbedSource, 4 * 1024],

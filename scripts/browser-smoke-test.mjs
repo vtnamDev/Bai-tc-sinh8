@@ -219,7 +219,12 @@ try {
   }));
   assert.equal(embedFallbackState.status, 'Không tải được 3D · đang hiển thị ảnh tham chiếu');
   assert.equal(embedFallbackState.iframeCount, 0, 'The failed remote viewer must be released from the DOM.');
-  assert.equal(embedFallbackState.fallbackOpacity, '1', 'A cited image must remain visible when the remote 3D viewer fails.');
+  await page.waitForFunction(() => {
+    const image = document.querySelector('#slideStage .anatomy3d-panel--embed.is-embed-failed .anatomy3d-fallback');
+    return image && Number.parseFloat(getComputedStyle(image).opacity) >= 0.95;
+  }, null, { timeout: 1500 });
+  embedFallbackState.fallbackOpacity = await embeddedModel.locator('.anatomy3d-fallback').evaluate(image => getComputedStyle(image).opacity);
+  assert.ok(Number.parseFloat(embedFallbackState.fallbackOpacity) >= 0.95, 'A cited image must become fully visible after the fallback transition.');
   await page.screenshot({ path: `${outputDir}/mobile-model-view.png` });
   assert.equal(await page.locator('#slideStage > .slide-page:not(.slide-transition-ghost)').evaluate(el => el.classList.contains('is-model-active')), true,
     'The active mobile model view must enable the interaction layer.');
