@@ -231,7 +231,11 @@ try {
   assert.equal(await annotationToggle.getAttribute('aria-expanded'), 'true', 'The anatomy annotations toggle must expose its expanded state.');
   const annotationPanel = embeddedModel.locator('.anatomy3d-annotation-panel');
   await annotationPanel.waitFor({ state: 'visible' });
-  assert.ok((await annotationPanel.textContent()).includes('Men răng'), 'The tooth model annotation should connect the 3D view to the biology lesson.');
+  const annotationText = await annotationPanel.textContent();
+  const modelType = await embeddedModel.getAttribute('data-anatomy3d');
+  const expectedAnnotationTerm = ({ tooth:'Men răng', stomach:'Niêm mạc', intestine:'Ruột non', worm:'Giun đường ruột', liver:'Gan' })[modelType];
+  assert.ok(expectedAnnotationTerm && annotationText.includes(expectedAnnotationTerm),
+    `The ${modelType || 'active'} model annotation should match its anatomy and lesson: ${annotationText}`);
   await annotationToggle.click();
   assert.equal(await annotationToggle.getAttribute('aria-expanded'), 'false', 'The annotation panel must be dismissible.');
   assert.equal(await annotationPanel.isVisible(), false);
