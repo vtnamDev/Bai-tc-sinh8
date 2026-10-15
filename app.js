@@ -44,7 +44,7 @@
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
       if (Array.isArray(saved)) {
-        // Replace the older bundled draft with the current, researched 20-slide deck.
+        // Replace outdated bundled drafts with the current, researched 25-slide deck.
         const personalDecks = saved.filter(deck => isValidDeckShape(deck) && deck.id !== seedDeck.id && !deck.isSeed);
         return [seedDeck, ...personalDecks];
       }
@@ -406,6 +406,8 @@
     startStageAtmosphere();
     $('#viewerDeckTitle').textContent = currentDeck.title;
     renderSlide();
+    // Move keyboard focus into the presentation so arrow keys work immediately.
+    $('#slideStage').focus({ preventScroll: true });
     if (location.hash !== '#present/' + encodeURIComponent(currentDeck.id)) {
       history.pushState({ presentation: currentDeck.id }, '', '#present/' + encodeURIComponent(currentDeck.id));
     }
@@ -2368,8 +2370,8 @@
     if (target.matches('[data-quiz-answer]')) answerQuiz(Number(target.dataset.quizAnswer));
     if (target.matches('[data-quiz-restart]')) restartQuiz();
     if (target.id === 'viewerSound') toggleQuizSound();
-    if (target.id === 'slidePrev') goPrevious();
-    if (target.id === 'slideNext') goNext();
+    if (target.id === 'slidePrev') { goPrevious(); $('#slideStage').focus({ preventScroll: true }); }
+    if (target.id === 'slideNext') { goNext(); $('#slideStage').focus({ preventScroll: true }); }
     if (target.id === 'viewerClose' || target.id === 'viewerExit') exitPresentation();
     if (target.id === 'viewerFullscreen') { toggleFullscreen(); return; }
     if (target.id === 'viewerProjector') { toggleProjectorMode(); return; }

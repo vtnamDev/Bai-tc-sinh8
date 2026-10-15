@@ -11,11 +11,11 @@
   <link rel="preconnect" href="https://images.pexels.com">
   <link rel="preconnect" href="https://upload.wikimedia.org">
   <link rel="dns-prefetch" href="https://www.who.int">
-  <link rel="stylesheet" href="/styles.css?v=20261015-4xt-cinematic-transitions-v30">
-  <link rel="stylesheet" href="/editorial-light.css?v=20261015-4xt-cinematic-transitions-v30">
-  <script src="/bai32-deck.js?v=20261015-4xt-cinematic-transitions-v30" defer></script>
-  <script src="/model-embed.js?v=20261015-4xt-cinematic-transitions-v30" defer></script>
-  <script src="/app.js?v=20261015-4xt-cinematic-transitions-v30" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20261016-4xt-keyboard-first-v31">
+  <link rel="stylesheet" href="/editorial-light.css?v=20261016-4xt-keyboard-first-v31">
+  <script src="/bai32-deck.js?v=20261016-4xt-keyboard-first-v31" defer></script>
+  <script src="/model-embed.js?v=20261016-4xt-keyboard-first-v31" defer></script>
+  <script src="/app.js?v=20261016-4xt-keyboard-first-v31" defer></script>
 </head>
 <body>
   <div class="ambient ambient-a" aria-hidden="true"></div>
@@ -126,7 +126,7 @@
   <section class="viewer" id="presentationViewer" hidden aria-label="Chế độ trình chiếu">
     <canvas class="stage-atmosphere" id="stageAtmosphere" aria-hidden="true"></canvas>
     <div class="viewer-topbar"><button class="viewer-brand" id="viewerClose" aria-label="Đóng chế độ trình chiếu"><span class="viewer-back">←</span><img src="/assets/mark.svg" alt="" width="28" height="28"><span>4xT <small>BIOSPHERE SLIDES</small></span></button><div class="viewer-title"><span class="viewer-live-dot"></span><span id="viewerDeckTitle">Bài thuyết trình</span></div><div class="viewer-controls"><button class="viewer-control viewer-contents-control" id="viewerContents" aria-label="Mở mục lục">Mục lục</button><button class="viewer-control" id="viewerControlsToggle" aria-label="Ẩn điều khiển" aria-pressed="false" title="Ẩn/hiện giao diện điều khiển (phím H)">Ẩn điều khiển</button><button class="viewer-control viewer-projector-control" id="viewerProjector" aria-label="Bật chế độ chiếu TV" aria-pressed="false" title="Tối ưu HDMI/TV, hiệu ứng điện ảnh (P)"><span aria-hidden="true">▣</span><span class="projector-label">Chiếu TV</span><kbd class="projector-key">P</kbd></button><button class="viewer-control" id="viewerFullscreen" aria-label="Toàn màn hình" aria-pressed="false" title="Toàn màn hình (F)"><span aria-hidden="true">⛶</span><span class="fullscreen-label">Toàn màn hình</span></button><button class="viewer-control" id="viewerExit" aria-label="Thoát trình chiếu">Thoát <span>Esc</span></button></div></div>
-    <div class="slide-stage" id="slideStage" aria-live="polite"></div>
+    <div class="slide-stage" id="slideStage" tabindex="-1" aria-label="Nội dung trình chiếu. Dùng phím mũi tên trái/phải để chuyển trang." aria-live="polite"></div>
     <button class="side-hit side-hit-left" id="slidePrev" aria-label="Trang trước"><span class="hit-arrow">←</span><span class="hit-label">TRANG TRƯỚC</span></button><button class="side-hit side-hit-right" id="slideNext" aria-label="Trang tiếp theo"><span class="hit-label">TRANG TIẾP</span><span class="hit-arrow">→</span></button>
     <div class="viewer-bottom"><span id="viewerSlideCaption">01 / 25</span><div class="progress-track"><span id="viewerProgress"></span></div><div class="viewer-bottom-actions"><span class="key-hint"><kbd>←</kbd><kbd>→</kbd> để di chuyển</span><button id="viewerSound" class="viewer-mini viewer-sound-mini" aria-label="Tắt âm thanh" title="Âm thanh slide và phản hồi đúng/sai đang bật" aria-pressed="true">♫</button><button id="viewerPlayMotion" class="viewer-mini" aria-pressed="true">✧ Chuyển động</button></div></div><div class="viewer-corner-mark">4xT / PRESENTATION SYSTEM</div><div class="contents-overlay" id="presentationContents" hidden aria-label="Mục lục bài trình chiếu">
       <section class="contents-panel" role="dialog" aria-modal="true" aria-labelledby="contentsHeading">

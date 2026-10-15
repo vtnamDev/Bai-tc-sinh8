@@ -50,6 +50,22 @@ try {
   await page.locator('#mainNav [data-view="library"]').click();
   await page.locator('#heroSample').click();
   await page.locator('#presentationViewer').waitFor({ state: 'visible', timeout: 10000 });
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'slideStage',
+    'Opening the presenter should move keyboard focus to the slide stage.');
+  await page.keyboard.press('ArrowRight');
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
+  await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '01 / 25');
+  await page.locator('#slideNext').click();
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'slideStage',
+    'Using the next-slide control should keep keyboard navigation ready.');
+  await page.keyboard.press('ArrowRight');
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '03 / 25');
+  await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '02 / 25');
+  await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(() => document.querySelector('#viewerSlideCaption')?.textContent?.trim() === '01 / 25');
   await page.waitForTimeout(250);
   const initialPresentationState = await page.evaluate(() => ({
     caption: document.querySelector('#viewerSlideCaption')?.textContent?.trim() || null,

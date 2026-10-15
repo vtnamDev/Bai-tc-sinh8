@@ -36,7 +36,7 @@ Website trình chiếu khoa học có bố cục biên tập riêng cho máy tí
 ## Cách trình chiếu
 - Mở bài Bài 32 trong thư viện rồi chọn **Trình chiếu**.
 - Trong trình chiếu, mở **Mục lục** để nhảy tới trang cụ thể; dùng nút điều khiển hoặc phím **H** để ẩn/hiện giao diện.
-- Bấm nửa phải để đi tiếp, nửa trái để quay lại; có thể dùng phím mũi tên trên bàn phím.
+- Bấm nửa phải để đi tiếp, nửa trái để quay lại; phím mũi tên trái/phải dùng được ngay sau khi mở bài, kể cả sau khi bấm nút điều hướng.
 - Trang 22 có vòng suy luận tình huống, trang 23 có bài kiểm tra tổng hợp 5 câu; chọn đáp án để xem phản hồi đúng/sai, lời giải thích và điểm tổng kết. Mỗi bệnh cũng có một câu hỏi chọn đáp án ngay trên trang tình huống. Nút `♫` bật/tắt âm thanh phản hồi; hiệu ứng âm thanh được tạo trong trình duyệt.
 - Bật **Toàn màn hình** khi thuyết trình trên máy tính hoặc trình duyệt hỗ trợ.
 - Chỉnh các dòng `[Điền họ tên]` và phân công thành viên trong `bai32-deck.js` trước khi thuyết trình.
