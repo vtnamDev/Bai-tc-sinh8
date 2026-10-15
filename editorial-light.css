@@ -596,3 +596,18 @@ html[data-theme=light] #presentationViewer .viewer-mini:disabled{
 @media(max-width:600px){
   #presentationViewer .anatomy3d-fallback-credit{left:10px;right:10px;bottom:25px;font-size:7px}
 }
+
+
+/* v26 — show fallback credits only while their fallback image is visible; keep the 3D control rows clear. */
+#presentationViewer .anatomy3d-panel:not(.anatomy3d-panel--embed) .anatomy3d-fallback-credit{
+  display:flex;bottom:52px
+}
+#presentationViewer .anatomy3d-panel.is-3d-ready .anatomy3d-fallback-credit,
+#presentationViewer .anatomy3d-panel.is-native-loading .anatomy3d-fallback-credit,
+#presentationViewer .anatomy3d-panel.is-native-ready .anatomy3d-fallback-credit{
+  display:none!important
+}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-fallback-credit{display:none!important}
+#presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-fallback-credit{
+  display:flex!important;position:relative;left:auto;right:auto;bottom:auto;margin:2px 4px 0
+}

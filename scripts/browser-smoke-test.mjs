@@ -225,6 +225,10 @@ try {
   }, null, { timeout: 1500 });
   embedFallbackState.fallbackOpacity = await embeddedModel.locator('.anatomy3d-fallback').evaluate(image => getComputedStyle(image).opacity);
   assert.ok(Number.parseFloat(embedFallbackState.fallbackOpacity) >= 0.95, 'A cited image must become fully visible after the fallback transition.');
+  const fallbackCredit = embeddedModel.locator('.anatomy3d-fallback-credit');
+  await fallbackCredit.waitFor({ state: 'visible', timeout: 1500 });
+  assert.ok((await fallbackCredit.textContent()).includes('Suyash.dwivedi'), 'Fallback image credit must be visible when the image is used.');
+  assert.ok(await fallbackCredit.locator('a[href="https://creativecommons.org/licenses/by-sa/4.0/"]').count() === 1, 'Fallback image license must be linked independently from the 3D model license.');
   await page.screenshot({ path: `${outputDir}/mobile-model-view.png` });
   const annotationToggle = embeddedModel.locator('[data-model-action="annotations"]');
   await annotationToggle.click();

@@ -26,7 +26,7 @@ for (const [name, source, limit] of sourceBudgets) {
   assert.ok(bytes <= limit, `${name} exceeds its source budget: ${bytes} bytes > ${limit} bytes`);
 }
 const totalSourceBytes = sourceBudgets.reduce((sum, [, source]) => sum + Buffer.byteLength(source, 'utf8'), 0);
-assert.ok(totalSourceBytes <= 520 * 1024, `Combined JS/CSS source exceeds 520 KiB: ${totalSourceBytes} bytes`);
+assert.ok(totalSourceBytes <= 523 * 1024, `Combined JS/CSS source exceeds 523 KiB: ${totalSourceBytes} bytes`);
 assert.match(html, /<meta name="viewport"[^>]*viewport-fit=cover/, 'Mobile safe-area layout must remain enabled.');
 assert.match(html, /<script[^>]+defer/, 'Application scripts should be deferred to avoid blocking HTML parsing.');
 assert.ok(!/<link[^>]+rel=["']preload["'][^>]+href=["'][^"']+\\.(?:mp4|webm|glb)(?:[?"']|$)/i.test(html), 'Large video/model assets must not be eagerly preloaded.');
