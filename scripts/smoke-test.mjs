@@ -127,7 +127,7 @@ assert.ok(css.includes('BioSphere v13 — one live slide'), 'The low-latency sin
 assert.ok(css.includes('story-continuity-single') && css.includes('story-chapter-single'), 'Incoming-only motion must use fast continuity and chapter transitions.');
 assert.ok(app.includes("transitionLayer.className='slide-transition-layer'") && app.includes("stage.appendChild(transitionLayer)"), 'Animated navigation must create a temporary overlay without cloning the outgoing slide.');
 assert.ok(css.includes('.slide-transition-layer:before') && css.includes('@keyframes fourxt-transition-sweep') && css.includes('data-transition="chapter"'), 'Transitions must include a visible light wipe and a richer chapter reveal.');
-assert.ok(css.includes('@keyframes fx-arrive'), 'Slides need a depth-based arrival animation.');
+assert.ok(css.includes('fourxt-transition-sweep') && css.includes('animation-duration:.42s!important') && css.includes('animation-duration:.68s!important'), 'Visible cinematic sweep and separate same-chapter/chapter timing must be present.');
 assert.ok(css.includes('HDMI / TV projector canvas') && css.includes('.viewer.projector-mode #slideStage'), 'The desktop HDMI projector canvas must have a dedicated responsive layout.');
 assert.ok(css.includes('.viewer-projector-control') && css.includes('projector-mode .viewer-bottom'), 'Projector controls and the progress overlay must remain styled in fullscreen.');
 assert.ok(css.includes('.live-photo{') && css.includes('data-motion-bridge="instant"]'), 'Photos must remain crisp and reveal-only navigation must avoid entrance animation.');

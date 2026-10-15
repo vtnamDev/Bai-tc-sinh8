@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-4xt-cinematic-transitions-v28';
+const SHELL_VERSION = '20261015-4xt-cinematic-transitions-v29';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [

@@ -3181,20 +3181,18 @@ html[data-performance-lite="true"] .viewer .slide-page:not(.slide-transition-gho
 @keyframes fourxt-copy-arrive{from{opacity:0;transform:translate3d(0,13px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes fourxt-media-arrive{from{opacity:0;transform:perspective(1100px) translate3d(0,14px,0) rotateY(-1.5deg) scale(.975);filter:blur(5px)}to{opacity:1;transform:perspective(1100px) translate3d(0,0,0) rotateY(0) scale(1);filter:blur(0)}}
 
-/* 4xT v28: cinematic slide wipe + depth arrival; reduced-motion friendly. */
-#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="continuity"]{--fx-x:30px;--fx-z:-42px;--fx-rot:-2.1deg;--fx-scale:.986;animation:fx-arrive .42s cubic-bezier(.18,.82,.2,1) both!important}
-#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="chapter"]{--fx-x:48px;--fx-y:5px;--fx-z:-96px;--fx-rot:-4deg;--fx-scale:.965;animation:fx-arrive .68s cubic-bezier(.16,.84,.2,1) both!important}
-#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-direction="backward"][data-motion-bridge="continuity"]{--fx-x:-30px;--fx-rot:2.1deg}
-#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-direction="backward"][data-motion-bridge="chapter"]{--fx-x:-48px;--fx-rot:4deg}
-#slideStage>.slide-transition-layer{position:absolute;z-index:12;inset:0;overflow:hidden;pointer-events:none;opacity:0;mix-blend-mode:screen;contain:paint;animation:fourxt-transition-wash .44s ease-out both}
+
+/* 4xT v29: readable cinematic wipe between slides. */
+#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="continuity"]{animation-duration:.42s!important}
+#presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="chapter"]{animation-duration:.68s!important}
+#slideStage>.slide-transition-layer{position:absolute;z-index:12;inset:0;overflow:hidden;pointer-events:none;opacity:0;mix-blend-mode:screen;animation:fourxt-transition-wash .44s ease-out both}
 #slideStage>.slide-transition-layer[data-transition="chapter"]{animation-duration:.72s}
-#slideStage>.slide-transition-layer:before{content:"";position:absolute;top:-35%;bottom:-35%;left:-45%;width:58%;background:linear-gradient(100deg,transparent,color-mix(in srgb,var(--stage-accent,#8fe6be) 12%,transparent) 35%,#f6fff5c9 50%,color-mix(in srgb,var(--stage-secondary,#c6efd7) 25%,transparent) 64%,transparent);transform:translate3d(-135%,0,0) skewX(-17deg);animation:fourxt-transition-sweep .44s cubic-bezier(.16,.82,.2,1) both}
+#slideStage>.slide-transition-layer:before{content:"";position:absolute;top:-35%;bottom:-35%;left:-45%;width:58%;background:linear-gradient(100deg,transparent,color-mix(in srgb,var(--stage-accent,#8fe6be) 12%,transparent) 35%,#f6fff5c9 50%,transparent 66%);transform:translate3d(-135%,0,0) skewX(-17deg);animation:fourxt-transition-sweep .44s cubic-bezier(.16,.82,.2,1) both}
 #slideStage>.slide-transition-layer[data-transition="chapter"]:before{width:68%;animation-duration:.72s}
 #slideStage>.slide-transition-layer[data-direction="backward"]:before{animation-name:fourxt-transition-sweep-back}
 @keyframes fourxt-transition-wash{0%{opacity:0}18%{opacity:.64}66%{opacity:.22}100%{opacity:0}}
 @keyframes fourxt-transition-sweep{0%{opacity:0;transform:translate3d(-135%,0,0) skewX(-17deg)}17%{opacity:1}100%{opacity:0;transform:translate3d(265%,0,0) skewX(-17deg)}}
 @keyframes fourxt-transition-sweep-back{0%{opacity:0;transform:translate3d(265%,0,0) skewX(-17deg)}17%{opacity:1}100%{opacity:0;transform:translate3d(-135%,0,0) skewX(-17deg)}}
-@keyframes fx-arrive{from{opacity:0;transform:perspective(1600px) translate3d(var(--fx-x,0),var(--fx-y,0),var(--fx-z,0)) rotateY(var(--fx-rot,0deg)) scale(var(--fx-scale,1))}to{opacity:1;transform:none}}
 @media(max-width:800px){
 #presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="continuity"]{animation-duration:.34s!important}
 #presentationViewer:not(.motion-off) #slideStage>.slide-page[data-motion-bridge="chapter"]{animation-duration:.52s!important}
@@ -3202,7 +3200,4 @@ html[data-performance-lite="true"] .viewer .slide-page:not(.slide-transition-gho
 #slideStage>.slide-transition-layer[data-transition="chapter"],#slideStage>.slide-transition-layer[data-transition="chapter"]:before{animation-duration:.52s}
 #slideStage>.slide-transition-layer:before{width:74%;left:-58%}
 }
-@media(prefers-reduced-motion:reduce){
-#presentationViewer #slideStage>.slide-page[data-motion-bridge]{animation:none!important;transform:none!important}
-#slideStage>.slide-transition-layer,#slideStage>.slide-transition-layer:before{animation:none!important;display:none!important}
-}
+@media(prefers-reduced-motion:reduce){#presentationViewer #slideStage>.slide-page[data-motion-bridge]{animation:none!important;transform:none!important}#slideStage>.slide-transition-layer,#slideStage>.slide-transition-layer:before{animation:none!important;display:none!important}}
