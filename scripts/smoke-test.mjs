@@ -2,13 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
-const [html, app, deckSource, css, polishCss, serviceWorker] = await Promise.all([
+const [html, app, deckSource, css, polishCss, serviceWorker, digestiveSvg] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../app.js', import.meta.url), 'utf8'),
   readFile(new URL('../bai32-deck.js', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
   readFile(new URL('../workspace-polish.css', import.meta.url), 'utf8'),
   readFile(new URL('../service-worker.js', import.meta.url), 'utf8'),
+  readFile(new URL('../assets/digestive-mini.svg', import.meta.url), 'utf8'),
 ]);
 
 // Guard against accidental bundle growth. These are source-size budgets, not gzip estimates.
@@ -100,6 +101,8 @@ assert.equal(workerVersion, assetVersions[0], 'The service-worker shell cache mu
 assert.equal((css.match(/\{/g) || []).length, (css.match(/\}/g) || []).length, 'CSS block braces must remain balanced.');
 assert.equal(polishCss.split('{').length, polishCss.split('}').length, 'UI polish CSS block braces must remain balanced.');
 assert.ok(polishCss.includes('.study-buddy-sticker') && polishCss.includes('prefers-reduced-motion:reduce'), 'Cute UI details must remain small and respect reduced motion.');
+assert.ok(digestiveSvg.length < 8 * 1024 && digestiveSvg.includes('<svg') && digestiveSvg.includes('</svg>'), 'The digestive hero illustration must remain a small local SVG asset.');
+assert.ok(html.includes('src="/assets/digestive-mini.svg"') && serviceWorker.includes("'./assets/digestive-mini.svg'"), 'The hero illustration must be served locally and cached in the app shell.');
 assert.match(html, /class="hero-photo-img"[^>]*loading="eager"[^>]*fetchpriority="high"/, 'The primary hero image should be prioritized without preloading heavy slide media.');
 
 assert.match(app, /function safeHttpUrl\(/, 'Imported resource URLs must be protocol-checked.');
