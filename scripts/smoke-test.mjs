@@ -16,7 +16,7 @@ const [html, app, deckSource, css, lightCss, modelEmbedSource, serviceWorker] = 
 const sourceBudgets = [
   ['app.js', app, 172 * 1024],
   ['styles.css', css, 220 * 1024],
-  ['editorial-light.css', lightCss, 45 * 1024],
+  ['editorial-light.css', lightCss, 48 * 1024],
   ['model-embed.js', modelEmbedSource, 4 * 1024],
   ['bai32-deck.js', deckSource, 75 * 1024],
   ['service-worker.js', serviceWorker, 8 * 1024],
@@ -26,7 +26,7 @@ for (const [name, source, limit] of sourceBudgets) {
   assert.ok(bytes <= limit, `${name} exceeds its source budget: ${bytes} bytes > ${limit} bytes`);
 }
 const totalSourceBytes = sourceBudgets.reduce((sum, [, source]) => sum + Buffer.byteLength(source, 'utf8'), 0);
-assert.ok(totalSourceBytes <= 520 * 1024, `Combined JS/CSS source exceeds 470 KiB: ${totalSourceBytes} bytes`);
+assert.ok(totalSourceBytes <= 520 * 1024, `Combined JS/CSS source exceeds 520 KiB: ${totalSourceBytes} bytes`);
 assert.match(html, /<meta name="viewport"[^>]*viewport-fit=cover/, 'Mobile safe-area layout must remain enabled.');
 assert.match(html, /<script[^>]+defer/, 'Application scripts should be deferred to avoid blocking HTML parsing.');
 assert.ok(!/<link[^>]+rel=["']preload["'][^>]+href=["'][^"']+\\.(?:mp4|webm|glb)(?:[?"']|$)/i.test(html), 'Large video/model assets must not be eagerly preloaded.');
@@ -139,6 +139,7 @@ assert.match(modelEmbedSource, /addEventListener\('viewerready'/, 'Sketchfab emb
 assert.ok(app.includes('biosphere-viewer-ready') && app.includes('biosphere-viewer-error') && app.includes('is-embed-failed'), '3D embed readiness and its readable fallback state must be handled.');
 assert.ok(lightCss.includes('.slide-key-idea{') && lightCss.includes('#f0dfb0'), 'The key-idea card must have a distinct light-theme surface, separate from its parent card.');
 assert.ok(lightCss.includes('.media-mode-button.is-active') && lightCss.includes('outline:3px solid #b58a2c'), 'Light-theme controls need a coherent gold active state and visible keyboard focus.');
+assert.ok(lightCss.includes('#presentationViewer.projector-mode #slideStage>.slide-page:not([data-visual=team])') && lightCss.includes('overflow:hidden!important'), 'The desktop projector must preserve a fixed slide canvas rather than inherit the general desktop scrolling rule.');
 assert.ok(html.includes('01 / 25') && !html.includes('01 / 32'), 'The initial caption must match the 25-slide lesson.');
 assert.ok(!app.includes(`data-fallback="' + fallback + '"`), 'Fallback URLs must be escaped before entering HTML attributes.');
 assert.match(css, /prefers-reduced-motion\s*:\s*reduce/, 'Reduced-motion preferences must be supported.');

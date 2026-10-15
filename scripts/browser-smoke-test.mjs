@@ -298,6 +298,12 @@ try {
       layoutDisplay:layout ? getComputedStyle(layout).display : null,
       pageCount:stage?.querySelectorAll(':scope > .slide-page').length ?? 0,
       ghostCount:stage?.querySelectorAll(':scope > .slide-transition-ghost').length ?? 0,
+      pageHeight:page?.getBoundingClientRect().height ?? 0,
+      stageHeight:stage?.getBoundingClientRect().height ?? 0,
+      pageOverflowY:page ? getComputedStyle(page).overflowY : null,
+      layoutHeight:layout?.getBoundingClientRect().height ?? 0,
+      contentScrollHeight:layout?.querySelector('.slide-content')?.scrollHeight ?? 0,
+      contentClientHeight:layout?.querySelector('.slide-content')?.clientHeight ?? 0,
     };
   });
   assert.equal(projectorState.enabled, true);
@@ -309,6 +315,10 @@ try {
   assert.equal(projectorState.stagePosition, 'absolute');
   assert.equal(projectorState.toolbarPosition, 'absolute');
   assert.equal(projectorState.layoutDisplay, 'grid');
+  assert.equal(projectorState.pageOverflowY, 'hidden', 'The full-screen slide frame must stay fixed; only the inner content panel may scroll when content is taller than the viewport.');
+  assert.ok(Math.abs(projectorState.pageHeight - projectorState.stageHeight) <= 2, `Projector slide must occupy the full stage: ${JSON.stringify(projectorState)}`);
+  assert.ok(Math.abs(projectorState.layoutHeight - projectorState.pageHeight) <= 2, `Projector grid must fit its slide frame: ${JSON.stringify(projectorState)}`);
+  assert.ok(projectorState.contentClientHeight > 0 && projectorState.contentScrollHeight >= projectorState.contentClientHeight, 'Projector content region must have a measurable scroll container for long slide copy.');
   assert.deepEqual({ pages:projectorState.pageCount, ghosts:projectorState.ghostCount }, { pages:1, ghosts:0 },
     `Projector transitions still must never retain a second full-frame slide: ${JSON.stringify(projectorState)}`);
   await page.screenshot({ path: `${outputDir}/desktop-hdmi-projector-mode.png` });

@@ -496,3 +496,38 @@ html[data-theme=light] #presentationViewer .viewer-mini:disabled{
 #presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-status{
   color:#844a32!important;background:#fff0e5!important;border-color:#e8c0ad!important
 }
+
+
+/* v23 — preserve the fixed 16:9 projector canvas after the editorial overflow pass. */
+@media(min-width:801px){
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page:not([data-visual=team]){
+    display:grid!important;place-items:stretch!important;align-items:stretch!important;
+    height:100%!important;min-height:0!important;overflow:hidden!important;
+    padding:clamp(76px,8vh,104px) clamp(30px,3vw,62px) clamp(48px,5.6vh,72px)!important;
+  }
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page:not([data-visual=team])>.slide-layout{
+    height:100%!important;min-height:0!important;align-items:stretch!important;
+  }
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page:not([data-visual=team])>.slide-layout>.slide-content:not(.slide-content--team){
+    align-self:stretch!important;height:100%!important;min-height:0!important;max-height:100%!important;
+    overflow-y:auto!important;scrollbar-color:#d8c89f transparent!important;
+  }
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page:not([data-visual=team])>.slide-layout>.slide-side-content{
+    align-self:stretch!important;height:100%!important;min-height:0!important;padding-top:0!important;
+  }
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page[data-visual=team]{
+    display:flex!important;align-items:stretch!important;justify-content:center!important;
+    height:100%!important;min-height:0!important;overflow:hidden!important;
+    padding:clamp(76px,8vh,104px) clamp(30px,3vw,62px) clamp(48px,5.6vh,72px)!important;
+  }
+  html[data-theme=light] #presentationViewer.projector-mode #slideStage>.slide-page[data-visual=team]>.slide-layout--team{
+    height:100%!important;min-height:0!important;justify-content:center!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme=light] #presentationViewer.projector-mode .photo-color-wash,
+  html[data-theme=light] #presentationViewer.projector-mode .photo-halo,
+  html[data-theme=light] #presentationViewer.projector-mode .slide-key-idea:after{
+    animation:none!important;transition:none!important
+  }
+}
