@@ -415,8 +415,12 @@
 
   function renderInteractive3D(slide) {
     const type = String(slide.model3D || 'intestine');
-    const image = safeHttpUrl(slide.modelFallback || slide.image || '');
-    const alt = String(slide.modelFallbackAlt || slide.imageAlt || 'Hình minh họa mô hình giải phẫu');
+    const image = safeHttpUrl(slide.modelFallback || slide.imageFallback || slide.image || '');
+    const alt = String(slide.modelFallbackAlt || slide.imageFallbackAlt || slide.imageAlt || 'Hình minh họa mô hình giải phẫu');
+    const fallbackSourceUrl = safeHttpUrl(slide.modelFallbackSourceUrl || slide.imageFallbackSourceUrl || '');
+    const fallbackCredit = String(slide.modelFallbackCredit || slide.imageFallbackCredit || '');
+    const fallbackLicenseUrl = safeHttpUrl(slide.modelFallbackLicense || slide.imageFallbackLicense || '');
+    const fallbackLicenseLabel = String(slide.modelFallbackLicenseLabel || slide.imageFallbackLicenseLabel || 'Giấy phép ảnh dự phòng');
     const title = String(slide.modelTitle || 'Mô hình tương tác');
     const description = String(slide.modelDescription || 'Mô hình sơ đồ tương tác.');
     const modelSrc = safeHttpUrl(slide.modelSrc || '');
@@ -499,6 +503,12 @@
         (sourceUrl ? '<a href="' + escapeHTML(sourceUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(credit) + ' ↗</a>' : '<span>' + escapeHTML(credit) + '</span>') +
         (license ? '<a href="' + escapeHTML(license) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(licenseLabel) + '</a>' : '') +
       '</div>' +
+      (fallbackCredit || fallbackSourceUrl || fallbackLicenseUrl
+        ? '<div class="anatomy3d-fallback-credit"><span>Ảnh dự phòng:</span> ' +
+          (fallbackSourceUrl ? '<a href="' + escapeHTML(fallbackSourceUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(fallbackCredit || 'Nguồn ảnh') + '</a>' : '<span>' + escapeHTML(fallbackCredit || 'Nguồn ảnh chưa ghi rõ') + '</span>') +
+          (fallbackLicenseUrl ? ' · <a href="' + escapeHTML(fallbackLicenseUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(fallbackLicenseLabel) + '</a>' : '') +
+          '</div>'
+        : '') +
       '<div class="anatomy3d-footnote">' + (modelEmbed ? 'Mô hình tương tác · xem nguồn và giấy phép bên dưới.' : (modelSrc ? 'Xoay bằng chuột · cuộn để phóng to · mô hình tham chiếu giải phẫu' : 'Kéo chuột để xoay · lăn chuột để phóng to · mô hình sơ đồ minh họa')) + '</div>' +
     '</aside>';
   }

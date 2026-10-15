@@ -58,6 +58,11 @@ for (const slide of deck.slides.filter(item => item.classroomPrompt)) {
   assert.ok(typeof prompt.explanation === 'string' && prompt.explanation.length > 20, `Case quiz needs explanatory feedback: ${slide.title}`);
 }
 assert.equal(deck.slides.filter(slide => slide.model3D).length, 5, 'Keep the five curated 3D scenes.');
+const modelSlides = deck.slides.filter(slide => slide.model3D);
+assert.ok(modelSlides.every(slide => typeof (slide.modelFallback || slide.imageFallback || slide.image) === 'string' && Boolean(slide.modelFallback || slide.imageFallback || slide.image)), 'Every 3D scene must have a usable fallback image.');
+assert.ok(modelSlides.every(slide => Boolean(slide.modelFallbackAlt || slide.imageFallbackAlt || slide.imageAlt)), 'Every 3D fallback image must have accurate alt text.');
+assert.ok(modelSlides.every(slide => /^https:\/\//i.test(slide.modelFallbackSourceUrl || '') && typeof slide.modelFallbackCredit === 'string' && slide.modelFallbackCredit.trim() && /^https:\/\//i.test(slide.modelFallbackLicense || '') && typeof slide.modelFallbackLicenseLabel === 'string'), 'Every 3D fallback image must include source, attribution, and license metadata.');
+assert.ok(app.includes('slide.modelFallback || slide.imageFallback || slide.image') && app.includes('anatomy3d-fallback-credit'), 'The renderer must use dedicated fallback assets and show their attribution separately from the 3D model.');
 const flowSlides = deck.slides.filter(slide => slide.flowVisual);
 assert.equal(flowSlides.length, 5, 'Each disease scene should include a lightweight process diagram.');
 assert.ok(flowSlides.every(slide => typeof slide.flowVisual.label === 'string' && Array.isArray(slide.flowVisual.steps) && slide.flowVisual.steps.length === 3 && slide.flowVisual.steps.every(step => typeof step === 'string')), 'Process diagram data must contain three labeled steps.');
@@ -68,6 +73,7 @@ assert.equal(quizSlides.reduce((total, slide) => total + (slide.quizQuestions?.l
 const urlKeys = [
   'image', 'imageFallback', 'imageSourceUrl', 'video', 'video4k',
   'videoSourceUrl', 'modelSrc', 'modelSourceUrl', 'modelLicense',
+  'modelFallbackSourceUrl', 'modelFallbackLicense',
 ];
 const resources = [];
 for (const [index, slide] of deck.slides.entries()) {
