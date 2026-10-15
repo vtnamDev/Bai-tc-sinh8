@@ -210,3 +210,27 @@ html[data-theme=light] .nav-link:focus-visible{
 }
 html[data-performance-lite="true"] .study-buddy-sticker{animation:none}
 html[data-performance-lite="true"] .deck-card{transition: none}
+
+
+/* Override the legacy mobile dark panel with the same readable ivory editorial surface. */
+@media(max-width:800px){
+  #presentationViewer #slideStage > .slide-page > .slide-layout > .slide-content:not(.slide-content--team){
+    color:#342d22!important;
+    background:linear-gradient(145deg,#fffefaf9,#fbf5eaf8 62%,#fffdf8f9)!important;
+    border:1px solid #e7d9bd!important;
+    border-radius:19px!important;
+    box-shadow:0 12px 30px #94742a10,inset 0 1px #fff!important;
+    backdrop-filter:blur(6px)!important;
+    -webkit-backdrop-filter:blur(6px)!important;
+  }
+  #presentationViewer #slideStage > .slide-page > .slide-layout > .slide-content:not(.slide-content--team) .slide-title{
+    color:#2f2a20!important;text-shadow:none!important;
+  }
+  #presentationViewer #slideStage > .slide-page > .slide-layout > .slide-content:not(.slide-content--team) .slide-subtitle{
+    color:#625a49!important;text-shadow:none!important;
+  }
+  #presentationViewer #slideStage > .slide-page > .slide-layout > .slide-content:not(.slide-content--team) .slide-point{
+    color:#3b3429!important;background:linear-gradient(145deg,#fffef9,#fbf4e5)!important;
+    border-color:#e8dcc1!important;
+  }
+}
