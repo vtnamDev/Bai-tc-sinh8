@@ -251,3 +251,149 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
   #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::before{top:7px;right:7px;width:27px;height:27px;border-radius:10px;font-size:15px;opacity:.24}
   #presentationViewer #slideStage:not([data-slide-index="2"]) .slide-page::after{left:5px;bottom:5px;width:22px;height:22px;font-size:13px;opacity:.24}
 }
+
+
+/* BioSphere v20 · cream editorial contrast, refined projector chrome and model framing */
+#presentationViewer{color:#382f21!important;background:#fbf7ec!important;--stage-accent:#ad8736;--stage-secondary:#dfbd6e}
+#presentationViewer .viewer-topbar{
+ color:#352d21!important;background:linear-gradient(110deg,#fffdf8f8,#f9f2e2f5 55%,#fffdf8f8)!important;
+ border-bottom:1px solid #e4d5b4!important;box-shadow:0 8px 28px #866b2a0b!important
+}
+#presentationViewer .viewer-brand,#presentationViewer .viewer-title{color:#342e23!important;text-shadow:none!important}
+#presentationViewer .viewer-brand small{color:#8f8168!important}
+#presentationViewer .viewer-back{color:#9a7727!important}
+#presentationViewer .viewer-control{
+ color:#4b3c21!important;border:1px solid #e5d7b8!important;
+ background:linear-gradient(135deg,#fffef9,#f5ecd7)!important;
+ box-shadow:0 4px 12px #95772b10!important;backdrop-filter:blur(10px)
+}
+#presentationViewer .viewer-control:hover,#presentationViewer .viewer-control:focus-visible{
+ color:#694c14!important;border-color:#c7a75a!important;background:#fff7df!important;
+ outline:2px solid #c6a354!important;outline-offset:2px
+}
+#presentationViewer .viewer-control span:last-child{color:#8d7851!important;opacity:1!important}
+#presentationViewer .viewer-bottom{
+ color:#695a3d!important;background:linear-gradient(110deg,#fffdf8fa,#f5ecd9fa,#fffdf8fa)!important;
+ border-top:1px solid #e3d5b7!important;box-shadow:0 -8px 28px #866b2a0b!important
+}
+#presentationViewer .viewer-mini{color:#72561e!important;border:1px solid #e2d4b4!important;background:#fffaf0!important;box-shadow:0 3px 9px #8e70210a}
+#presentationViewer .viewer-mini:hover{color:#513b12!important;background:#f8ebc9!important;border-color:#d7bd7b!important}
+#presentationViewer .viewer-mini[aria-pressed=true]{color:#fffdf7!important;background:linear-gradient(130deg,#9a772e,#c7a756)!important;border-color:#9b792f!important}
+#presentationViewer .progress-track{background:#e8dcc6!important}
+#presentationViewer .progress-track span{background:linear-gradient(90deg,#b49543,#e3c56f,#dfb978)!important}
+#presentationViewer .key-hint{color:#7e7055!important}
+#presentationViewer .key-hint kbd{color:#70531b!important;border-color:#e0d1b1!important;background:#fffaf0!important}
+#presentationViewer .viewer-corner-mark{color:#a08c63!important}
+
+/* Stage-wide tone overrides every chapter accent while retaining those accents in charts and labels. */
+#presentationViewer #slideStage{
+ --stage-accent:#a98231!important;--stage-secondary:#dbbd79!important;color:#342d22!important;
+ background:radial-gradient(ellipse at 8% 4%,#f6e6bfad,transparent 37%),radial-gradient(ellipse at 96% 90%,#efe0bb8a,transparent 35%),linear-gradient(130deg,#fffdf7,#faf5e9 60%,#f8f0df)!important
+}
+#presentationViewer #slideStage>.slide-page{
+ background:linear-gradient(135deg,#fffefaf5,#fbf6eaf5 65%,#fffdf8f5)!important;
+ color:#342d22!important
+}
+#presentationViewer #slideStage .slide-content{color:#342d22!important}
+#presentationViewer #slideStage .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-subtitle{color:#625a49!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-kicker{color:#8a671c!important;background:#fff6df!important;border:1px solid #e8d8b2!important;box-shadow:none!important}
+#presentationViewer #slideStage .slide-key-idea{color:#342e22!important;background:linear-gradient(135deg,#fffef9,#f7efd9)!important;border-color:#e5d5ad!important}
+#presentationViewer #slideStage .slide-key-idea-top>span,#presentationViewer #slideStage .slide-support-heading strong{color:#8e6c20!important}
+#presentationViewer #slideStage .slide-key-idea p{color:#342e22!important}
+#presentationViewer #slideStage .slide-point{color:#3b3429!important;background:linear-gradient(145deg,#fffef9,#fbf4e5)!important;border:1px solid #e8dcc1!important;box-shadow:0 8px 19px #8b6e2a0c!important;backdrop-filter:none!important}
+#presentationViewer #slideStage .slide-point span{color:#3b3429!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-point b{color:#8e6a1b!important;background:#f4e7c5!important}
+#presentationViewer #slideStage .slide-source{color:#776747!important;background:linear-gradient(90deg,#f3e6c67a,transparent)!important;border-color:#d6b86c!important}
+#presentationViewer #slideStage .slide-links-title{color:#8e6b1e!important}
+#presentationViewer #slideStage .slide-links a{color:#4a3b21!important;background:#fffaf0!important;border-color:#e7d8b8!important}
+#presentationViewer #slideStage .slide-links a span{color:#9a751d!important}
+#presentationViewer #slideStage .editorial-diagram{color:#383125!important;background:linear-gradient(145deg,#fffef9,#f7f0e2)!important;border-color:#e6d8bb!important;box-shadow:0 10px 24px #92742a0a!important}
+#presentationViewer #slideStage .editorial-diagram-heading>span{color:#94701c!important}
+#presentationViewer #slideStage .editorial-diagram-heading h2,#presentationViewer #slideStage .editorial-map-core strong{color:#332d22!important}
+#presentationViewer #slideStage .editorial-diagram-heading p,#presentationViewer #slideStage .editorial-diagram-node p{color:#675d49!important}
+#presentationViewer #slideStage .editorial-diagram-node{color:#3c352a!important;background:#fffdf8!important;border-color:#e4d8bd!important}
+#presentationViewer #slideStage .editorial-diagram-node strong{color:#332d22!important}
+#presentationViewer #slideStage .editorial-diagram-index{color:#866419!important;background:#f6e9c8!important}
+
+/* The dark translucent mobile card caused the low-contrast title in the supplied screenshots. */
+@media(max-width:800px){
+ #presentationViewer .slide-page{padding-top:16px}
+ #presentationViewer .slide-content:not(.slide-content--team){
+  padding:clamp(12px,3.3vw,19px)!important;
+  background:linear-gradient(145deg,#fffefaf9,#fbf5eaf7 62%,#fffdf8f9)!important;
+  border:1px solid #e7d9bd!important;border-radius:20px!important;
+  box-shadow:0 12px 32px #94742a0d!important;
+  backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important
+ }
+ #presentationViewer .slide-content:not(.slide-content--team) .slide-title{color:#2f2a20!important}
+ #presentationViewer .slide-content:not(.slide-content--team) .slide-subtitle{color:#625a49!important}
+ #presentationViewer .slide-point{color:#3b3429!important}
+}
+
+/* Interactive case questions and quizzes share the light reading surface with clear state colors. */
+#presentationViewer #slideStage .classroom-prompt{color:#383125!important;background:linear-gradient(145deg,#fffef9,#f7f0e2)!important;border-color:#e5d7b9!important;box-shadow:0 10px 24px #92742a0a!important}
+#presentationViewer #slideStage .classroom-prompt-kicker,#presentationViewer #slideStage .classroom-prompt-kicker b{color:#8d6a1d!important}
+#presentationViewer #slideStage .classroom-scenario,#presentationViewer #slideStage .classroom-question{color:#332d22!important}
+#presentationViewer #slideStage .classroom-answer{border-color:#e6dbc2!important}
+#presentationViewer #slideStage .classroom-answer strong{color:#87651c!important}
+#presentationViewer #slideStage .classroom-answer p{color:#3d3629!important}
+#presentationViewer #slideStage .classroom-answer small{color:#6c624f!important}
+#presentationViewer #slideStage .reveal-answer-btn{color:#6e5117!important;background:#f8eccb!important;border-color:#e3ce95!important}
+#presentationViewer #slideStage .case-quiz-answer{color:#393124!important;background:#fffdf7!important;border-color:#e4d7bc!important}
+#presentationViewer #slideStage .case-quiz-letter{color:#856117!important;background:#f6e9c8!important;border-color:#e4d2a4!important}
+#presentationViewer #slideStage .case-quiz-answer.is-correct{color:#244b29!important;background:#e7f4df!important;border-color:#9cc48c!important}
+#presentationViewer #slideStage .case-quiz-answer.is-wrong{color:#793e34!important;background:#fff0e8!important;border-color:#e3a393!important}
+#presentationViewer #slideStage .quiz-panel{--quiz-accent:#a67a23;color:#3a3327!important;background:linear-gradient(145deg,#fffdf8,#f7efd9)!important;border-color:#e5d5ad!important;box-shadow:0 12px 30px #92742a12!important;backdrop-filter:blur(8px)}
+#presentationViewer #slideStage .quiz-panel:before{opacity:.08}
+#presentationViewer #slideStage .quiz-panel-top,#presentationViewer #slideStage .quiz-panel-top b,#presentationViewer #slideStage .quiz-question-label span{color:#82621d!important}
+#presentationViewer #slideStage .quiz-panel-top b{border-color:#e7d7b4!important;background:#fffaf0!important}
+#presentationViewer #slideStage .quiz-progress{background:#e8dcc1!important}
+#presentationViewer #slideStage .quiz-question-label strong,#presentationViewer #slideStage .quiz-results h3,#presentationViewer #slideStage .quiz-score-orb strong{color:#332d22!important}
+#presentationViewer #slideStage .quiz-answer{color:#41382b!important;background:#fffdf8!important;border-color:#e7dcc5!important;box-shadow:0 4px 12px #886b2508!important}
+#presentationViewer #slideStage .quiz-answer-text{color:#41382b!important}
+#presentationViewer #slideStage .quiz-option-letter{color:#8e6b1e!important;background:#f7edcf!important;border-color:#e5d6b3!important}
+#presentationViewer #slideStage .quiz-answer.is-correct{color:#244b29!important;background:#e8f4df!important;border-color:#9dc38f!important}
+#presentationViewer #slideStage .quiz-answer.is-wrong{color:#793e34!important;background:#fff0e9!important;border-color:#e3a596!important}
+#presentationViewer #slideStage .quiz-encouragement{color:#655b49!important;background:#f4e8cb!important}
+#presentationViewer #slideStage .quiz-feedback{color:#3d3528!important;background:#fffaf0!important;border-color:#e5d8bd!important}
+#presentationViewer #slideStage .quiz-feedback strong,#presentationViewer #slideStage .quiz-feedback p{color:#3d3528!important}
+#presentationViewer #slideStage .quiz-feedback.is-correct{background:#e8f4df!important;border-color:#b0cda3!important}
+#presentationViewer #slideStage .quiz-feedback.is-wrong{background:#fff0e9!important;border-color:#e3a596!important}
+#presentationViewer #slideStage .quiz-score-strip{color:#776642!important;border-color:#e5d8bd!important}
+#presentationViewer #slideStage .quiz-score-strip strong{color:#3c3427!important}
+#presentationViewer #slideStage .quiz-score-strip small,#presentationViewer #slideStage .quiz-sound-hint{color:#766b56!important}
+#presentationViewer #slideStage .quiz-score-orb{background:radial-gradient(circle at 34% 26%,#f6e6bf,#fffaf0 76%)!important;border-color:#e0cb94!important}
+#presentationViewer #slideStage .quiz-score-orb span,#presentationViewer #slideStage .quiz-score-orb small{color:#76613a!important}
+#presentationViewer #slideStage .quiz-score-meter{background:#e9ddc3!important}
+#presentationViewer #slideStage .quiz-result-subtitle{color:#71664f!important}
+#presentationViewer #slideStage .quiz-recap-row{background:#fffaf0!important;border-color:#e7dcc5!important}
+#presentationViewer #slideStage .quiz-recap-row strong,#presentationViewer #slideStage .quiz-recap-row p{color:#453b2d!important}
+#presentationViewer #slideStage .quiz-action{color:#49391c!important;background:#fffaf0!important;border-color:#e4d5b6!important}
+#presentationViewer #slideStage .quiz-action-primary{color:#fffdf7!important;background:linear-gradient(110deg,#9b792f,#c7a454)!important}
+
+/* Real, creator-attributed Sketchfab viewer is framed as a part of the lesson rather than a dark tile. */
+#presentationViewer .anatomy3d-panel--embed{display:flex;flex-direction:column;gap:0;height:min(68vh,690px);min-height:460px;max-height:690px;padding:0 12px 10px;border-color:#e3d4b3!important;background:radial-gradient(ellipse at 50% 22%,#f8edcf,transparent 48%),linear-gradient(145deg,#fffdf7,#f4ead4 78%,#fbf7ec)!important;box-shadow:0 18px 42px #8c702312,inset 0 1px #fff!important}
+#presentationViewer .anatomy3d-panel--embed:before,#presentationViewer .anatomy3d-panel--embed:after{border-color:#c9b16c45!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-native-slot{position:relative;z-index:2;inset:auto;display:block!important;flex:1 1 auto;min-height:280px;width:100%;margin-top:40px;border:1px solid #e4d6b6;border-radius:16px;overflow:hidden;background:#fffdf8}
+#presentationViewer .anatomy3d-embed-viewer{position:absolute;inset:0;display:block;width:100%;height:100%;border:0;background:#fffdf8}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-title{position:relative;z-index:3;left:auto;right:auto;bottom:auto;display:grid;gap:5px;margin:0;padding:12px 5px 5px;text-shadow:none!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-title strong{color:#332d22!important;font-size:clamp(15px,1.3vw,20px)}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-title span{color:#675d4a!important;max-width:none}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-controls{display:none!important}
+#presentationViewer .anatomy3d-embed-hint{color:#76674d;font-size:10px;line-height:1.35;padding:4px 5px}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-attribution{position:relative;left:auto;right:auto;bottom:auto;margin-top:4px;padding:4px 4px 0;color:#786d56;font-size:8px;flex-wrap:wrap}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-attribution a{color:#87651c!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-footnote{position:relative;left:auto;right:auto;bottom:auto;margin:2px 4px 0;padding:2px 0 0;color:#7e7155!important;font-size:8px;line-height:1.25}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-fallback{opacity:.05!important}
+#presentationViewer .anatomy3d-panel--embed.is-embed-ready .anatomy3d-fallback{opacity:0!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-canvas{display:none!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-topline{top:14px;left:18px;right:18px}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-topline>span:first-child{color:#8a671b!important}
+#presentationViewer .anatomy3d-panel--embed .anatomy3d-status{color:#78643b!important;background:#fff9e9dd!important;border-color:#e7d9b8!important}
+@media(max-width:800px){
+ #presentationViewer .viewer-topbar{min-height:52px;padding:6px 8px;gap:7px}
+ #presentationViewer .viewer-control{min-height:35px;padding:0 9px;font-size:10px}
+ #presentationViewer .anatomy3d-panel--embed{height:auto;min-height:470px;max-height:none;padding:0 8px 9px}
+ #presentationViewer .anatomy3d-panel--embed .anatomy3d-native-slot{min-height:260px;margin-top:39px}
+}
