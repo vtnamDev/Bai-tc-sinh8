@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-cream-cinematic-models-v22-foundation';
+const SHELL_VERSION = '20261015-cream-cinematic-models-v23-foundation';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [
@@ -13,6 +13,7 @@ const SHELL_URLS = [
   './model-embed.js?v=' + SHELL_VERSION,
   './app.js?v=' + SHELL_VERSION,
   './assets/mark.svg',
+  './assets/digestive-mini.svg',
   './assets/team/animal-wolf.svg',
   './assets/team/animal-cat.svg',
   './assets/team/animal-rabbit.svg',
@@ -32,6 +33,7 @@ const SHELL_PATHS = new Set([
   new URL('./model-embed.js', SCOPE_URL).pathname,
   new URL('./app.js', SCOPE_URL).pathname,
   new URL('./assets/mark.svg', SCOPE_URL).pathname,
+  new URL('./assets/digestive-mini.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-wolf.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-cat.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-rabbit.svg', SCOPE_URL).pathname,
