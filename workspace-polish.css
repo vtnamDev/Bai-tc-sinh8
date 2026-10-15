@@ -234,3 +234,36 @@ html[data-performance-lite="true"] .deck-card{transition: none}
     border-color:#e8dcc1!important;
   }
 }
+
+
+/* Final hierarchy pass: keep the hero statement together and make deck-cover type readable. */
+html[data-theme=light] .hero-copy h1{
+  font-size:clamp(43px,5.6vw,78px);
+  line-height:.98;
+  letter-spacing:-.068em;
+}
+html[data-theme=light] .deck-cover-shade{
+  background:linear-gradient(100deg,#38270fe8 0%,#4a3519b8 61%,#31210c70 100%),
+             linear-gradient(0deg,#30200cf2 0%,#30200c00 82%);
+}
+html[data-theme=light] .cover-top,
+html[data-theme=light] .cover-foot{
+  color:#fff4d6;text-shadow:0 2px 12px #241706b5;
+}
+html[data-theme=light] .cover-title{
+  color:#fffdf6;text-shadow:0 3px 20px #241706d9;
+  max-width:88%;
+}
+html[data-theme=light] .deck-cover-photo{opacity:.74;filter:saturate(1.08) contrast(1.04)}
+html[data-theme=light] .hero-photo-tile--digestive{
+  background:linear-gradient(145deg,#fffdf7,#f5e8c9);
+}
+html[data-theme=light] .hero-photo-tile--digestive .hero-digestive-illustration{
+  object-fit:contain;padding:7px;background:transparent;
+}
+@media(max-width:760px){
+  html[data-theme=light] .hero-copy h1{
+    font-size:clamp(39px,10.4vw,47px);
+    line-height:.99;letter-spacing:-.065em;
+  }
+}
