@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
-const [html, app, deckSource, css, serviceWorker] = await Promise.all([
+const [html, app, deckSource, css, polishCss, serviceWorker] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../app.js', import.meta.url), 'utf8'),
   readFile(new URL('../bai32-deck.js', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
+  readFile(new URL('../workspace-polish.css', import.meta.url), 'utf8'),
   readFile(new URL('../service-worker.js', import.meta.url), 'utf8'),
 ]);
 
@@ -16,6 +17,7 @@ const sourceBudgets = [
   ['styles.css', css, 220 * 1024],
   ['bai32-deck.js', deckSource, 75 * 1024],
   ['service-worker.js', serviceWorker, 8 * 1024],
+  ['workspace-polish.css', polishCss, 12 * 1024],
 ];
 for (const [name, source, limit] of sourceBudgets) {
   const bytes = Buffer.byteLength(source, 'utf8');
@@ -91,11 +93,14 @@ const versionFor = asset => {
   assert.ok(match, `Missing cache-busted asset reference for ${asset}`);
   return match[1];
 };
-const assetVersions = ['styles.css', 'bai32-deck.js', 'app.js'].map(versionFor);
+const assetVersions = ['styles.css', 'editorial-light.css', 'workspace-polish.css', 'bai32-deck.js', 'app.js'].map(versionFor);
 assert.equal(new Set(assetVersions).size, 1, 'CSS, deck data and app code must use the same cache-busting version.');
 const workerVersion = serviceWorker.match(/const SHELL_VERSION = '([^']+)'/)?.[1];
 assert.equal(workerVersion, assetVersions[0], 'The service-worker shell cache must match the current HTML asset version.');
 assert.equal((css.match(/\{/g) || []).length, (css.match(/\}/g) || []).length, 'CSS block braces must remain balanced.');
+assert.equal((polishCss.match(/\\{/g) || []).length, (polishCss.match(/\\}/g) || []).length, 'UI polish CSS block braces must remain balanced.');
+assert.ok(polishCss.includes('.study-buddy-sticker') && polishCss.includes('prefers-reduced-motion:reduce'), 'Cute UI details must remain small and respect reduced motion.');
+assert.match(html, /class="hero-photo-img"[^>]*loading="eager"[^>]*fetchpriority="high"/, 'The primary hero image should be prioritized without preloading heavy slide media.');
 
 assert.match(app, /function safeHttpUrl\(/, 'Imported resource URLs must be protocol-checked.');
 assert.match(app, /function optimizeImageUrl\(/, 'Remote image sizes must be adapted to viewport and performance profile.');
