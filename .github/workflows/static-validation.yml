@@ -1,0 +1,30 @@
+name: Static validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Check presentation data and source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check bai32-deck.js
+          node --check scripts/smoke-test.mjs
+      - name: Validate slide data, resources and release cache keys
+        run: node scripts/smoke-test.mjs

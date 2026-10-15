@@ -1,0 +1,58 @@
+name: Browser smoke test
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: biosphere-browser-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Chromium test runner
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start static website
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/biosphere-http.log 2>&1 &
+          echo $! >/tmp/biosphere-http.pid
+          for attempt in $(seq 1 25); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/biosphere-http.log
+          exit 1
+
+      - name: Test mobile interactions in Chromium
+        run: node scripts/browser-smoke-test.mjs
+        env:
+          BIOSPHERE_URL: http://127.0.0.1:4173/
+
+      - name: Upload screenshots for visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: biosphere-browser-smoke-screenshots
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 7
