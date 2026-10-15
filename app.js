@@ -500,10 +500,14 @@
     activeAnatomy3D = null;
     delete model.panel.dataset.modelInitializing;
     if (model.kind === 'embed') {
-      model.iframe?.removeEventListener('load', model.onLoad);
+      window.clearTimeout(model.timeoutId);
+      model.iframe?.removeEventListener('biosphere-viewer-ready', model.onReady);
+      model.iframe?.removeEventListener('biosphere-viewer-error', model.onError);
       if (model.iframe) model.iframe.src = 'about:blank';
       model.iframe?.remove();
-      model.panel.classList.remove('is-embed-loading', 'is-embed-ready');
+      model.panel.classList.remove('is-embed-loading', 'is-embed-ready', 'is-embed-failed');
+      const status = model.panel.querySelector('.anatomy3d-status');
+      if (status) status.textContent = 'Sẵn sàng mở mô hình';
       return;
     }
     if (model.kind === 'native') {
@@ -721,18 +725,38 @@
     if (panel.dataset.modelEmbed) {
       try {
         const iframe = window.BioSphereModelEmbed(panel, panel.dataset.modelEmbed, panel.dataset.modelTitle || 'Mô hình giải phẫu 3D');
-        const model = { kind: 'embed', panel, iframe, onLoad: null };
+        const model = { kind: 'embed', panel, iframe, onReady: null, onError: null, timeoutId: 0, errorHandled: false };
         activeAnatomy3D = model;
+        panel.classList.remove('is-embed-failed', 'is-embed-ready');
         panel.classList.add('is-embed-loading');
         const status = panel.querySelector('.anatomy3d-status');
-        if (status) status.textContent = 'Đang tải 3D…';
-        model.onLoad = () => {
-          if (activeAnatomy3D !== model || !panel.isConnected) return;
-          panel.classList.remove('is-embed-loading');
+        if (status) status.textContent = 'Đang tải mô hình 3D…';
+
+        model.onReady = () => {
+          if (activeAnatomy3D !== model || !panel.isConnected || model.errorHandled) return;
+          window.clearTimeout(model.timeoutId);
+          model.timeoutId = 0;
+          panel.classList.remove('is-embed-loading', 'is-embed-failed');
           panel.classList.add('is-embed-ready');
-          if (status) status.textContent = 'Mô hình đã tải';
+          if (status) status.textContent = 'Mô hình 3D đã sẵn sàng';
         };
-        iframe.addEventListener('load', model.onLoad);
+        model.onError = () => {
+          if (activeAnatomy3D !== model || !panel.isConnected || model.errorHandled) return;
+          model.errorHandled = true;
+          window.clearTimeout(model.timeoutId);
+          model.timeoutId = 0;
+          panel.classList.remove('is-embed-loading', 'is-embed-ready');
+          panel.classList.add('is-embed-failed');
+          if (status) status.textContent = 'Không tải được 3D · đang hiển thị ảnh tham chiếu';
+          iframe.removeEventListener('biosphere-viewer-ready', model.onReady);
+          iframe.removeEventListener('biosphere-viewer-error', model.onError);
+          iframe.src = 'about:blank';
+          iframe.remove();
+        };
+
+        iframe.addEventListener('biosphere-viewer-ready', model.onReady);
+        iframe.addEventListener('biosphere-viewer-error', model.onError);
+        model.timeoutId = window.setTimeout(model.onError, 15000);
       } catch {
         delete panel.dataset.modelInitializing;
         initCustomThreeModel(panel, requestId);

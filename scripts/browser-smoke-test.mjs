@@ -205,8 +205,21 @@ try {
   assert.ok(await modelToggle.count() > 0, 'At least one curated 3D scene must expose the model switch.');
   assert.equal(await page.locator('#slideStage > .slide-page:not(.slide-transition-ghost) .editorial-diagram--process').count(), 1,
     'The disease scene should show a readable process diagram in the content column, not over the photo.');
+  // Simulate the Sketchfab API being unavailable and verify that the panel falls back to its cited image.
+  await page.route('https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js', route => route.abort());
   await modelToggle.click();
   await page.locator('#slideStage .media-3d-view:not([hidden])').waitFor({ state: 'visible', timeout: 5000 });
+  const embeddedModel = page.locator('#slideStage .anatomy3d-panel--embed');
+  await embeddedModel.waitFor({ state: 'visible', timeout: 5000 });
+  await page.waitForFunction(() => document.querySelector('#slideStage .anatomy3d-panel--embed')?.classList.contains('is-embed-failed'), null, { timeout: 5000 });
+  const embedFallbackState = await embeddedModel.evaluate(panel => ({
+    status: panel.querySelector('.anatomy3d-status')?.textContent?.trim() || '',
+    iframeCount: panel.querySelectorAll('iframe').length,
+    fallbackOpacity: getComputedStyle(panel.querySelector('.anatomy3d-fallback')).opacity,
+  }));
+  assert.equal(embedFallbackState.status, 'Không tải được 3D · đang hiển thị ảnh tham chiếu');
+  assert.equal(embedFallbackState.iframeCount, 0, 'The failed remote viewer must be released from the DOM.');
+  assert.equal(embedFallbackState.fallbackOpacity, '1', 'A cited image must remain visible when the remote 3D viewer fails.');
   await page.screenshot({ path: `${outputDir}/mobile-model-view.png` });
   assert.equal(await page.locator('#slideStage > .slide-page:not(.slide-transition-ghost)').evaluate(el => el.classList.contains('is-model-active')), true,
     'The active mobile model view must enable the interaction layer.');

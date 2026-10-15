@@ -2,11 +2,13 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
-const [html, app, deckSource, css, serviceWorker] = await Promise.all([
+const [html, app, deckSource, css, lightCss, modelEmbedSource, serviceWorker] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../app.js', import.meta.url), 'utf8'),
   readFile(new URL('../bai32-deck.js', import.meta.url), 'utf8'),
   readFile(new URL('../styles.css', import.meta.url), 'utf8'),
+  readFile(new URL('../editorial-light.css', import.meta.url), 'utf8'),
+  readFile(new URL('../model-embed.js', import.meta.url), 'utf8'),
   readFile(new URL('../service-worker.js', import.meta.url), 'utf8'),
 ]);
 
@@ -14,6 +16,8 @@ const [html, app, deckSource, css, serviceWorker] = await Promise.all([
 const sourceBudgets = [
   ['app.js', app, 168 * 1024],
   ['styles.css', css, 220 * 1024],
+  ['editorial-light.css', lightCss, 45 * 1024],
+  ['model-embed.js', modelEmbedSource, 4 * 1024],
   ['bai32-deck.js', deckSource, 75 * 1024],
   ['service-worker.js', serviceWorker, 8 * 1024],
 ];
@@ -22,7 +26,7 @@ for (const [name, source, limit] of sourceBudgets) {
   assert.ok(bytes <= limit, `${name} exceeds its source budget: ${bytes} bytes > ${limit} bytes`);
 }
 const totalSourceBytes = sourceBudgets.reduce((sum, [, source]) => sum + Buffer.byteLength(source, 'utf8'), 0);
-assert.ok(totalSourceBytes <= 470 * 1024, `Combined JS/CSS source exceeds 470 KiB: ${totalSourceBytes} bytes`);
+assert.ok(totalSourceBytes <= 520 * 1024, `Combined JS/CSS source exceeds 470 KiB: ${totalSourceBytes} bytes`);
 assert.match(html, /<meta name="viewport"[^>]*viewport-fit=cover/, 'Mobile safe-area layout must remain enabled.');
 assert.match(html, /<script[^>]+defer/, 'Application scripts should be deferred to avoid blocking HTML parsing.');
 assert.ok(!/<link[^>]+rel=["']preload["'][^>]+href=["'][^"']+\\.(?:mp4|webm|glb)(?:[?"']|$)/i.test(html), 'Large video/model assets must not be eagerly preloaded.');
@@ -91,7 +95,7 @@ const versionFor = asset => {
   assert.ok(match, `Missing cache-busted asset reference for ${asset}`);
   return match[1];
 };
-const assetVersions = ['styles.css', 'bai32-deck.js', 'app.js'].map(versionFor);
+const assetVersions = ['styles.css', 'editorial-light.css', 'bai32-deck.js', 'model-embed.js', 'app.js'].map(versionFor);
 assert.equal(new Set(assetVersions).size, 1, 'CSS, deck data and app code must use the same cache-busting version.');
 const workerVersion = serviceWorker.match(/const SHELL_VERSION = '([^']+)'/)?.[1];
 assert.equal(workerVersion, assetVersions[0], 'The service-worker shell cache must match the current HTML asset version.');
@@ -131,6 +135,11 @@ assert.ok(app.includes("target.matches('[data-case-answer]')"), 'Each disease ca
 assert.match(app, /function isValidDeckShape\(/, 'Imported deck structure must be validated.');
 assert.match(app, /threeLoadPromise = null;/, 'The Three.js loader should be retryable after a CDN failure.');
 assert.match(app, /modelViewerLoadPromise = null;/, 'The model-viewer loader should be retryable after a CDN failure.');
+assert.match(modelEmbedSource, /addEventListener\('viewerready'/, 'Sketchfab embed state must be based on the official viewer-ready event, not the iframe load event.');
+assert.ok(app.includes('biosphere-viewer-ready') && app.includes('biosphere-viewer-error') && app.includes('is-embed-failed'), '3D embed readiness and its readable fallback state must be handled.');
+assert.ok(lightCss.includes('.slide-key-idea{') && lightCss.includes('#f0dfb0'), 'The key-idea card must have a distinct light-theme surface, separate from its parent card.');
+assert.ok(lightCss.includes('.media-mode-button.is-active') && lightCss.includes('outline:3px solid #b58a2c'), 'Light-theme controls need a coherent gold active state and visible keyboard focus.');
+assert.ok(html.includes('01 / 25') && !html.includes('01 / 32'), 'The initial caption must match the 25-slide lesson.');
 assert.ok(!app.includes(`data-fallback="' + fallback + '"`), 'Fallback URLs must be escaped before entering HTML attributes.');
 assert.match(css, /prefers-reduced-motion\s*:\s*reduce/, 'Reduced-motion preferences must be supported.');
 assert.match(css, /@media\s*\(max-width:\s*600px\)/, 'The compact mobile layout must remain present.');
@@ -164,4 +173,4 @@ const toastEnd = app.indexOf('function renderDecks()', toastStart);
 const toastSource = app.slice(toastStart, toastEnd);
 assert.ok(app.includes('let toastTimer = 0;') && toastSource.includes("region.querySelector('.toast')") && toastSource.includes('clearTimeout(toastTimer)'), 'Rapid notifications must reuse one toast and clear its previous timer.');
 
-console.log(`BioSphere static validation passed: ${deck.slides.length} slides, ${resources.length} checked URLs, ${flowSlides.length} process diagrams, 5 disease case quizzes, ${quizSlides.length} class quiz slides, ${Math.round(totalSourceBytes / 1024)} KiB combined JS/CSS/SW/deck source.`);
+console.log(`BioSphere static validation passed: ${deck.slides.length} slides, ${resources.length} checked URLs, ${flowSlides.length} process diagrams, 5 disease case quizzes, ${quizSlides.length} class quiz slides, ${Math.round(totalSourceBytes / 1024)} KiB combined app/CSS/SW/deck/model source.`);

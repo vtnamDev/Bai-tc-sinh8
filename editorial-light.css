@@ -421,3 +421,78 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
   #presentationViewer #slideStage>.slide-page>.slide-layout>.slide-side-content{align-self:start!important;padding-top:clamp(3px,1vh,12px)}
   #presentationViewer #slideStage>.slide-page>.slide-layout>.slide-content:not(.slide-content--team){align-self:start!important}
 }
+
+
+/* v22: distinct idea hierarchy, ivory-gold controls, and a legible 3D fallback state. */
+html[data-theme=light] #presentationViewer #slideStage .slide-key-idea{
+  color:#342b1e!important;
+  background:linear-gradient(135deg,#f0dfb0 0%,#f8edcc 58%,#f2e3bd 100%)!important;
+  border:1px solid #d6b65e!important;
+  border-left:4px solid #a87b24!important;
+  box-shadow:inset 0 1px #fff8e4,0 10px 26px #96772a20!important;
+}
+html[data-theme=light] #presentationViewer #slideStage .slide-key-idea-top>span{
+  color:#6d4c13!important;font-weight:900!important;letter-spacing:.09em
+}
+html[data-theme=light] #presentationViewer #slideStage .slide-key-idea-top>b{
+  color:#6f5b31!important;background:#fff7e1!important;border:1px solid #dfc985!important
+}
+html[data-theme=light] #presentationViewer .viewer-control,
+html[data-theme=light] #presentationViewer .viewer-mini{
+  color:#4f4128!important;border-color:#e0d3b5!important;
+  background:linear-gradient(135deg,#fffdf7,#f8f0dd)!important;
+  box-shadow:inset 0 1px #fff,0 3px 12px #82672b0b!important
+}
+html[data-theme=light] #presentationViewer .viewer-control:hover,
+html[data-theme=light] #presentationViewer .viewer-mini:hover{
+  color:#3a2d16!important;border-color:#c5a04b!important;
+  background:linear-gradient(135deg,#fff7de,#f1e0b4)!important
+}
+html[data-theme=light] #presentationViewer .viewer-control[aria-pressed=true]{
+  color:#3a2d16!important;border-color:#c5a04b!important;
+  background:linear-gradient(115deg,#f6e6ba,#edd18b)!important
+}
+html[data-theme=light] #presentationViewer .side-hit{color:#8d6c24!important}
+html[data-theme=light] #presentationViewer .side-hit:hover{
+  color:#6f4e13!important;background:linear-gradient(90deg,#f3e3bb70,transparent)!important
+}
+html[data-theme=light] #presentationViewer .side-hit-right:hover{
+  background:linear-gradient(270deg,#f3e3bb70,transparent)!important
+}
+html[data-theme=light] #presentationViewer .media-mode-switch{
+  border-color:#dfd0ad!important;background:#f3ead4!important;box-shadow:inset 0 1px #fff!important
+}
+html[data-theme=light] #presentationViewer .media-mode-button{
+  color:#65583f!important;background:transparent!important;border-color:transparent!important
+}
+html[data-theme=light] #presentationViewer .media-mode-button:hover{
+  color:#3a2d16!important;background:#eee0bf!important
+}
+html[data-theme=light] #presentationViewer .media-mode-button.is-active{
+  color:#382b16!important;
+  background:linear-gradient(115deg,#d5b45c,#f5dda0)!important;
+  border-color:#b99135!important;box-shadow:0 3px 13px #bc984527!important
+}
+html[data-theme=light] #presentationViewer .viewer-control:focus-visible,
+html[data-theme=light] #presentationViewer .viewer-mini:focus-visible,
+html[data-theme=light] #presentationViewer .side-hit:focus-visible,
+html[data-theme=light] #presentationViewer .media-mode-button:focus-visible,
+html[data-theme=light] #presentationViewer .case-quiz-answer:focus-visible,
+html[data-theme=light] #presentationViewer .quiz-answer:focus-visible,
+html[data-theme=light] #presentationViewer .reveal-answer-btn:focus-visible,
+html[data-theme=light] #presentationViewer .ending-action:focus-visible{
+  outline:3px solid #b58a2c!important;outline-offset:3px!important
+}
+html[data-theme=light] #presentationViewer .viewer-control:disabled,
+html[data-theme=light] #presentationViewer .viewer-mini:disabled{
+  opacity:.48!important;cursor:not-allowed!important
+}
+#presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-native-slot{
+  display:none!important
+}
+#presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-fallback{
+  opacity:1!important;z-index:2;object-fit:contain;background:#fffdf8;border-radius:14px
+}
+#presentationViewer .anatomy3d-panel--embed.is-embed-failed .anatomy3d-status{
+  color:#844a32!important;background:#fff0e5!important;border-color:#e8c0ad!important
+}
