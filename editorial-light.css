@@ -397,3 +397,27 @@ html[data-theme=light] #presentationViewer #slideStage .slide-links-title,html[d
  #presentationViewer .anatomy3d-panel--embed{height:auto;min-height:470px;max-height:none;padding:0 8px 9px}
  #presentationViewer .anatomy3d-panel--embed .anatomy3d-native-slot{min-height:260px;margin-top:39px}
 }
+
+
+/* Final desktop pass: give every copy panel an ivory surface and prevent tall slides from being vertically clipped. */
+#presentationViewer #slideStage .slide-content:not(.slide-content--team){
+  color:#342d22!important;
+  background:linear-gradient(145deg,#fffefaf8,#fbf5eaf6 62%,#fffdf8f8)!important;
+  border:1px solid #e7d9bd!important;border-radius:22px!important;
+  box-shadow:0 14px 38px #94742a10!important;
+  backdrop-filter:blur(9px)!important;-webkit-backdrop-filter:blur(9px)!important;
+}
+#presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-title{color:#2f2a20!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-subtitle{color:#625a49!important;text-shadow:none!important}
+#presentationViewer #slideStage .slide-content:not(.slide-content--team) .slide-kicker{color:#8a671c!important;background:#fff6df!important;border-color:#e8d8b2!important}
+@media(min-width:801px){
+  #presentationViewer #slideStage>.slide-page{
+    align-items:flex-start!important;overflow-y:auto!important;overflow-x:hidden!important;
+    padding-top:clamp(22px,3.2vh,42px)!important;padding-bottom:clamp(30px,5vh,58px)!important
+  }
+  #presentationViewer #slideStage>.slide-page>.slide-layout{
+    height:auto!important;min-height:100%;align-items:start!important
+  }
+  #presentationViewer #slideStage>.slide-page>.slide-layout>.slide-side-content{align-self:start!important;padding-top:clamp(3px,1vh,12px)}
+  #presentationViewer #slideStage>.slide-page>.slide-layout>.slide-content:not(.slide-content--team){align-self:start!important}
+}
