@@ -1,4 +1,3 @@
-/* BioSphere Slides · KHTN 8 Bài 32 · 25-slide editorial edition */
 window.BIOSPHERE_BAI32_SEED = {
   "id": "khtn8-bai32-scaffold",
   "title": "5 bệnh liên quan đến hệ tiêu hóa",
@@ -50,14 +49,46 @@ window.BIOSPHERE_BAI32_SEED = {
       "subtitle": "Chúng em là nhóm BioSphere Slides — cùng tìm hiểu năm bệnh liên quan đến hệ tiêu hóa bằng kiến thức khoa học chính xác và những cách phòng bệnh gần gũi.",
       "points": [],
       "teamMembers": [
-        { "name": "Thành Nam", "role": "Chủ nhóm", "animal": "wolf" },
-        { "name": "Gia Hưng", "role": "Thành viên", "animal": "cat" },
-        { "name": "Trúc Ly", "role": "Ý tưởng", "animal": "rabbit" },
-        { "name": "Thiên Phúc", "role": "Ý tưởng", "animal": "penguin" },
-        { "name": "Bảo Uyên", "role": "Làm mẫu", "animal": "pink-cat" },
-        { "name": "Ngọc Dương", "role": "Thành viên", "animal": "otter" },
-        { "name": "Tuấn Minh", "role": "Ý tưởng", "animal": "fox" },
-        { "name": "Hoàng Quân", "role": "Lấy mẫu & chụp ảnh", "animal": "panda" }
+        {
+          "name": "Thành Nam",
+          "role": "Chủ nhóm",
+          "animal": "wolf"
+        },
+        {
+          "name": "Gia Hưng",
+          "role": "Thành viên",
+          "animal": "cat"
+        },
+        {
+          "name": "Trúc Ly",
+          "role": "Ý tưởng",
+          "animal": "rabbit"
+        },
+        {
+          "name": "Thiên Phúc",
+          "role": "Ý tưởng",
+          "animal": "penguin"
+        },
+        {
+          "name": "Bảo Uyên",
+          "role": "Làm mẫu",
+          "animal": "pink-cat"
+        },
+        {
+          "name": "Ngọc Dương",
+          "role": "Thành viên",
+          "animal": "otter"
+        },
+        {
+          "name": "Tuấn Minh",
+          "role": "Ý tưởng",
+          "animal": "fox"
+        },
+        {
+          "name": "Hoàng Quân",
+          "role": "Lấy mẫu & chụp ảnh",
+          "animal": "panda"
+        }
       ],
       "note": "BIOSPHERE SLIDES · KHOA HỌC TỰ NHIÊN 8",
       "visual": "team",
@@ -203,8 +234,8 @@ window.BIOSPHERE_BAI32_SEED = {
       "videoAlt": "Nha sĩ kiểm tra răng cho bệnh nhân",
       "video4k": "https://videos.pexels.com/video-files/5099678/5099678-uhd_3840_2160_30fps.mp4",
       "model3D": "tooth",
-      "modelTitle": "Mô hình răng",
-      "modelDescription": "Lớp men, ngà và tủy răng trong mặt cắt sơ đồ.",
+      "modelTitle": "Mô hình cắt lớp răng thật",
+      "modelDescription": "Khám phá cấu trúc bên trong của răng; mô hình không mô tả riêng ổ sâu.",
       "modelFallback": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Dental_Caries_Cavity_1.JPG/960px-Dental_Caries_Cavity_1.JPG?utm_campaign=index&utm_content=thumbnail&utm_source=commons.wikimedia.org",
       "modelFallbackAlt": "Ảnh cận cảnh răng có lỗ sâu, do Suyash.dwivedi công bố trên Wikimedia Commons.",
       "links": [],
@@ -217,7 +248,12 @@ window.BIOSPHERE_BAI32_SEED = {
         ]
       },
       "storyGroup": "tooth",
-      "keyIdea": "Mảng bám, đường và axit khiến men răng mất khoáng; các đợt lặp lại có thể tạo thành lỗ sâu."
+      "keyIdea": "Mảng bám, đường và axit khiến men răng mất khoáng; các đợt lặp lại có thể tạo thành lỗ sâu.",
+      "modelEmbed": "https://sketchfab.com/models/5ebeadf0b40940ca93a4ced5cfe0abb2/embed?autostart=0&ui_theme=light&ui_infos=0&ui_controls=1&ui_hint=0&ui_watermark=1&dnt=1",
+      "modelCredit": "Inside my Tooth · R-LAB / Sketchfab · CC BY 4.0",
+      "modelSourceUrl": "https://sketchfab.com/3d-models/inside-my-tooth-5ebeadf0b40940ca93a4ced5cfe0abb2",
+      "modelLicense": "https://creativecommons.org/licenses/by/4.0/",
+      "modelLicenseLabel": "CC BY 4.0"
     },
     {
       "kicker": "BỆNH 01 · PHÒNG NGỪA",
@@ -315,8 +351,8 @@ window.BIOSPHERE_BAI32_SEED = {
       "imageFit": "cover",
       "videoAlt": "Người ôm vùng bụng, minh họa cảm giác đau bụng",
       "model3D": "stomach",
-      "modelTitle": "Mô hình dạ dày",
-      "modelDescription": "Sơ đồ dạ dày và đoạn tá tràng tiếp nối.",
+      "modelTitle": "Dạ dày người · mô hình giải phẫu 3D",
+      "modelDescription": "Mô hình giải phẫu tham chiếu; tổn thương loét được giải thích bằng ảnh và sơ đồ riêng.",
       "modelFallback": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Gastric_Ulcer_Antrum.jpg",
       "modelFallbackAlt": "Ảnh nội soi cho thấy nhiều ổ loét tại hang vị dạ dày; ảnh minh họa y khoa, không đại diện cho một trường hợp cụ thể.",
       "flowVisual": {
@@ -335,7 +371,12 @@ window.BIOSPHERE_BAI32_SEED = {
         }
       ],
       "storyGroup": "stomach",
-      "keyIdea": "Loét dạ dày–tá tràng có nguyên nhân y khoa cụ thể, không thể kết luận chỉ từ thói quen ăn uống."
+      "keyIdea": "Loét dạ dày–tá tràng có nguyên nhân y khoa cụ thể, không thể kết luận chỉ từ thói quen ăn uống.",
+      "modelEmbed": "https://sketchfab.com/models/e0f1952de7204654ba469c3e887a029b/embed?autostart=0&ui_theme=light&ui_infos=0&ui_controls=1&ui_hint=0&ui_watermark=1&dnt=1",
+      "modelCredit": "Realistic Human Stomach · neshallads / Sketchfab · CC BY-NC 4.0",
+      "modelSourceUrl": "https://sketchfab.com/3d-models/realistic-human-stomach-e0f1952de7204654ba469c3e887a029b",
+      "modelLicense": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "modelLicenseLabel": "CC BY-NC 4.0"
     },
     {
       "kicker": "BỆNH 02 · NHẬN BIẾT",

@@ -1,6 +1,6 @@
 'use strict';
 
-const SHELL_VERSION = '20261015-cream-science-decor-v18';
+const SHELL_VERSION = '20261015-cream-cinematic-models-v19';
 const CACHE_NAME = 'biosphere-shell-' + SHELL_VERSION;
 const SCOPE_URL = new URL(self.registration.scope);
 const SHELL_URLS = [
@@ -9,6 +9,7 @@ const SHELL_URLS = [
   './styles.css?v=' + SHELL_VERSION,
   './editorial-light.css?v=' + SHELL_VERSION,
   './bai32-deck.js?v=' + SHELL_VERSION,
+  './model-embed.js?v=' + SHELL_VERSION,
   './app.js?v=' + SHELL_VERSION,
   './assets/mark.svg',
   './assets/team/animal-wolf.svg',
@@ -26,6 +27,7 @@ const SHELL_PATHS = new Set([
   new URL('./styles.css', SCOPE_URL).pathname,
   new URL('./editorial-light.css', SCOPE_URL).pathname,
   new URL('./bai32-deck.js', SCOPE_URL).pathname,
+  new URL('./model-embed.js', SCOPE_URL).pathname,
   new URL('./app.js', SCOPE_URL).pathname,
   new URL('./assets/mark.svg', SCOPE_URL).pathname,
   new URL('./assets/team/animal-wolf.svg', SCOPE_URL).pathname,

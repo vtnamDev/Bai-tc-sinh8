@@ -420,28 +420,32 @@
     const title = String(slide.modelTitle || 'Mô hình tương tác');
     const description = String(slide.modelDescription || 'Mô hình sơ đồ tương tác.');
     const modelSrc = safeHttpUrl(slide.modelSrc || '');
+    const modelEmbed = safeHttpUrl(slide.modelEmbed || '');
     const sourceUrl = safeHttpUrl(slide.modelSourceUrl || '');
     const credit = String(slide.modelCredit || 'Mô hình sơ đồ minh họa BioSphere');
     const license = safeHttpUrl(slide.modelLicense || '');
-    return '<aside class="anatomy3d-panel" data-anatomy3d="' + escapeHTML(type) + '"' +
+    const licenseLabel = String(slide.modelLicenseLabel || 'Giấy phép mô hình');
+    return '<aside class="anatomy3d-panel' + (modelEmbed ? ' anatomy3d-panel--embed' : '') + '" data-anatomy3d="' + escapeHTML(type) + '"' +
       (modelSrc ? ' data-model-src="' + escapeHTML(modelSrc) + '"' : '') +
+      (modelEmbed ? ' data-model-embed="' + escapeHTML(modelEmbed) + '"' : '') +
       ' data-model-title="' + escapeHTML(title) + '" aria-label="' + escapeHTML(title) + '">' +
       '<div class="anatomy3d-topline"><span>BIOSPHERE / 3D</span><span class="anatomy3d-status" role="status" aria-live="polite">Sẵn sàng mở mô hình</span></div>' +
       (image ? '<img class="anatomy3d-fallback" data-fallback-src="' + escapeHTML(image) + '" alt="' + escapeHTML(alt) + '" decoding="async" loading="lazy">' : '') +
       '<div class="anatomy3d-native-slot"></div>' +
       '<div class="anatomy3d-canvas" aria-hidden="true"></div>' +
       '<div class="anatomy3d-title"><strong>' + escapeHTML(title) + '</strong><span>' + escapeHTML(description) + '</span></div>' +
-      '<div class="anatomy3d-controls" role="group" aria-label="Điều khiển mô hình 3D">' +
-        '<button type="button" data-model-action="rotate" aria-pressed="false">Tự xoay</button>' +
-        '<button type="button" data-model-action="zoom-out" aria-label="Thu nhỏ mô hình">−</button>' +
-        '<button type="button" data-model-action="zoom-in" aria-label="Phóng to mô hình">＋</button>' +
-        '<button type="button" data-model-action="reset">Đặt lại</button>' +
-      '</div>' +
+      (modelEmbed ? '<div class="anatomy3d-embed-hint">Xoay và phóng to bằng điều khiển ngay trong mô hình.</div>' :
+        '<div class="anatomy3d-controls" role="group" aria-label="Điều khiển mô hình 3D">' +
+          '<button type="button" data-model-action="rotate" aria-pressed="false">Tự xoay</button>' +
+          '<button type="button" data-model-action="zoom-out" aria-label="Thu nhỏ mô hình">−</button>' +
+          '<button type="button" data-model-action="zoom-in" aria-label="Phóng to mô hình">＋</button>' +
+          '<button type="button" data-model-action="reset">Đặt lại</button>' +
+        '</div>') +
       '<div class="anatomy3d-attribution">' +
         (sourceUrl ? '<a href="' + escapeHTML(sourceUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(credit) + ' ↗</a>' : '<span>' + escapeHTML(credit) + '</span>') +
-        (license ? '<a href="' + escapeHTML(license) + '" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>' : '') +
+        (license ? '<a href="' + escapeHTML(license) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(licenseLabel) + '</a>' : '') +
       '</div>' +
-      '<div class="anatomy3d-footnote">' + (modelSrc ? 'Xoay bằng chuột · cuộn để phóng to · mô hình tham chiếu giải phẫu' : 'Kéo chuột để xoay · lăn chuột để phóng to · mô hình sơ đồ minh họa') + '</div>' +
+      '<div class="anatomy3d-footnote">' + (modelEmbed ? 'Mô hình tương tác · xem nguồn và giấy phép bên dưới.' : (modelSrc ? 'Xoay bằng chuột · cuộn để phóng to · mô hình tham chiếu giải phẫu' : 'Kéo chuột để xoay · lăn chuột để phóng to · mô hình sơ đồ minh họa')) + '</div>' +
     '</aside>';
   }
 
@@ -495,6 +499,13 @@
     if (!model) return;
     activeAnatomy3D = null;
     delete model.panel.dataset.modelInitializing;
+    if (model.kind === 'embed') {
+      model.iframe?.removeEventListener('load', model.onLoad);
+      if (model.iframe) model.iframe.src = 'about:blank';
+      model.iframe?.remove();
+      model.panel.classList.remove('is-embed-loading', 'is-embed-ready');
+      return;
+    }
     if (model.kind === 'native') {
       if (model.visibilityHandler) document.removeEventListener('visibilitychange', model.visibilityHandler);
       model.viewer.removeEventListener('load', model.onLoad);
@@ -706,6 +717,27 @@
     if (fallback && !fallback.getAttribute('src') && fallback.dataset.fallbackSrc) {
       fallback.src = fallback.dataset.fallbackSrc;
       fallback.addEventListener('error', () => fallback.classList.add('photo-load-failed'), { once: true });
+    }
+    if (panel.dataset.modelEmbed) {
+      try {
+        const iframe = window.BioSphereModelEmbed(panel, panel.dataset.modelEmbed, panel.dataset.modelTitle || 'Mô hình giải phẫu 3D');
+        const model = { kind: 'embed', panel, iframe, onLoad: null };
+        activeAnatomy3D = model;
+        panel.classList.add('is-embed-loading');
+        const status = panel.querySelector('.anatomy3d-status');
+        if (status) status.textContent = 'Đang tải 3D…';
+        model.onLoad = () => {
+          if (activeAnatomy3D !== model || !panel.isConnected) return;
+          panel.classList.remove('is-embed-loading');
+          panel.classList.add('is-embed-ready');
+          if (status) status.textContent = 'Mô hình đã tải';
+        };
+        iframe.addEventListener('load', model.onLoad);
+      } catch {
+        delete panel.dataset.modelInitializing;
+        initCustomThreeModel(panel, requestId);
+      }
+      return;
     }
     if (panel.dataset.modelSrc) {
       initReferenceModelViewer(panel, requestId).catch(() => {
@@ -1758,6 +1790,7 @@
           (isTeamSlide ? '' : '<div class="slide-side-content">' + (slide.model3D ? renderMediaWithModel(slide) : (slide.image ? renderPhoto(slide) : (slide.visual ? renderVisual(slide.visual) : ''))) + '</div>') +
         '</div>' +
       '</article>';
+    stage.dataset.slideIndex = String(slideIndex + 1);
 
     // There is no outgoing ghost to clean up: the old page was removed immediately above.
     attachLiveImageFallbacks(stage);
