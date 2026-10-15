@@ -61,9 +61,9 @@ window.BIOSPHERE_BAI32_SEED = {
       ],
       "note": "BIOSPHERE SLIDES · KHOA HỌC TỰ NHIÊN 8",
       "visual": "team",
-      "palette": "sunshine",
+      "palette": "teal",
       "imageMotionStyle": "editorial",
-      "storyGroup": "team",
+      "storyGroup": "foundation",
       "keyIdea": "Tám thành viên — cùng học hỏi, chia sẻ và trình bày kiến thức khoa học."
     },
     {
